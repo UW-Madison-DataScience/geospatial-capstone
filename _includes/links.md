@@ -14,6 +14,7 @@
 [email]: mailto:team@carpentries.org
 [github-importer]: https://import.github.com/
 [importer]: https://github.com/new/import
+[issues]: https://github.com/UW-Madison-DataScience/geospatial-capstone/issues
 [jekyll-collection]: https://jekyllrb.com/docs/collections/
 [jekyll-install]: https://jekyllrb.com/docs/installation/
 [jekyll-windows]: http://jekyll-windows.juthilo.com/
