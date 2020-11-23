@@ -16,9 +16,9 @@ createwiscraster <- function(bioclimlayer, counties){
 }
 
 createcounties_dfs <- function(rasterlayer, counties_spdf){
-    wiagg <- raster::extract(x=rasterlayer, y=counties_spdf, fun=mean, df=TRUE)
-    wiagg$poly_ID<- counties_wi_spdf$county
-    return(wiagg)
+    wiagg <- raster::extract(x=rasterlayer, y=counties_spdf,df=TRUE)
+    wiaggout <- merge(counties_wi_spdf, wiagg, by.x="countyIDnum", by.y="ID",duplicateGeoms=TRUE)
+    return(wiaggout@data)
 }
 ############################################################################
 #Get Data
@@ -51,6 +51,8 @@ writeRaster(precip_annual_wi, "../data/precip_annual_wi.tif")
 #Map raster cells to a county; save as csv
 #create csv assigning cells to counties
 counties_wi_spdf <- as(counties_wi, 'Spatial')
+counties_wi_spdf$countyIDnum <- 1:nrow(counties_wi_spdf)
+
 maxtemp <- createcounties_dfs(maxtemp_monthwarm_wi, counties_wi_spdf)
 mintemp <- createcounties_dfs(mintemp_monthcold_wi, counties_wi_spdf)
 precip <- createcounties_dfs(precip_annual_wi, counties_wi_spdf)
@@ -60,7 +62,7 @@ county_rastercells <- maxtemp
 county_rastercells$maxtemp_monthwarm <- county_rastercells$bio5
 county_rastercells$mintemp_monthcold <- mintemp$bio6
 county_rastercells$precip_annual <- precip$bio12
-county_rastercells$county <- county_rastercells$poly_ID
+
 #remove old vars
 county_rastercells$bio5 <- NULL
 county_rastercells$ID <- NULL
