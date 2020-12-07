@@ -21,7 +21,7 @@ solutions <- FALSE
 ```{r, echo=solutions, include=solutions}
 library(raster)
 library(ggplot2)
-library(gdal)
+library(rgdal)
 ```
 
 
