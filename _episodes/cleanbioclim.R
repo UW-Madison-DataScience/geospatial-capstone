@@ -9,7 +9,8 @@ library(dplyr)
 library(tidyr)
 
 #helper function
-createwiscraster <- function(bioclimlayer, counties){
+createwiscraster <- function(bioclimlayer, counties, scalar){
+    bioclimlayer <- bioclimlayer/scalar
     r2 <-crop(bioclimlayer, extent(counties))
     r3 <- mask(r2, counties)
     return(r3)
@@ -38,14 +39,14 @@ clim1 <- getData("worldclim", var="bio", res=10)
 
 ############################################################################
 #select, clean, save rasters
-maxtemp_monthwarm_wi <- createwiscraster(clim1$bio5, counties_wi)
-mintemp_monthcold_wi <- createwiscraster(clim1$bio6, counties_wi)
-precip_annual_wi <- createwiscraster(clim1$bio12, counties_wi)
+maxtemp_monthwarm_wi <- createwiscraster(clim1$bio5, counties_wi, scalar = 10)
+mintemp_monthcold_wi <- createwiscraster(clim1$bio6, counties_wi, scalar = 10)
+precip_annual_wi <- createwiscraster(clim1$bio12, counties_wi,scalar=1)
 
 #save rasters as geotiffs
-writeRaster(maxtemp_monthwarm_wi, "../data/maxtemp_monthwarm_wi.tif")
-writeRaster(mintemp_monthcold_wi, "../data/mintemp_monthcold_wi.tif")
-writeRaster(precip_annual_wi, "../data/precip_annual_wi.tif")
+writeRaster(maxtemp_monthwarm_wi, "../data/maxtemp_monthwarm_wi.tif", overwrite=TRUE)
+writeRaster(mintemp_monthcold_wi, "../data/mintemp_monthcold_wi.tif", overwrite=TRUE)
+writeRaster(precip_annual_wi, "../data/precip_annual_wi.tif", overwrite=TRUE)
 
 ############################################################################
 #Map raster cells to a county; save as csv
