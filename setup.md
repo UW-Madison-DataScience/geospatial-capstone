@@ -9,7 +9,7 @@ project.
 
 If you have not completed the workshop setup, you should do that before starting the capstone setup.
 Visit the [Setup Page](https://uw-madison-datascience.github.io/geospatial-workshop/setup.html) of
-the full workshop to install the necessary software.
+the [full workshop website]() to install the necessary software.
 
 ## Data
 
@@ -18,11 +18,11 @@ Sample data includes climate data to complement the environmental data used in t
 If you use your own data, there are some criteria to
 help you succeed in completing the learning objectives.
 
-### Sample Data
+### Capstone Data
 
 The capstone project uses data from the U.S. Department of Agriculture Natural Resources
 Conservation Service (NRCS).
-[Click here to visit the NRCS Geospatial Data Gateway](https://gdg.sc.egov.usda.gov/GDGOrder.aspx).
+[Click here to visit the NRCS Geospatial Data Gateway](https://gdg.sc.egov.usda.gov/GDGOrder.aspx?order=QuickState).
 
 The gateway guides you through 5 steps to request data:
 
@@ -32,14 +32,18 @@ The gateway guides you through 5 steps to request data:
 4. Who
 5. Review
 
-On the **WHERE** tab, set the method for selecting the order area to `Order by State` by clicking the link just below the word WHERE. 
-Then select Wisconsin from the dropdown.
+On the **WHERE** tab, select Wisconsin from the dropdown.
+
+If you are asked to select counties,
+change the method for selecting the order area to `Order by State` by 
+clicking the link just below the word WHERE.
 
 Click `CONTINUE`.
 
-On the **WHAT** tab, scroll down to the *Climate Precipitation* section and check the box next to
-`1971-2000 Annual Average Precipitation by State`. 
-Next scroll down to the *Climate Temperature* section and check the box next to
+On the **WHAT** tab, find the *Climate Precipitation* section and check the box next to
+`1971-2000 Annual Average Precipitation by State`.
+
+Next, find the *Climate Temperature* section and check the box next to
 `1971-2000 Annual Average Maximum Temperature by State`.
 
 Click `CONTINUE`.
@@ -71,12 +75,22 @@ This data includes the BIOCLIM dataset.
 You can read more about the BIOCLIM dataset
 [here](https://rdrr.io/cran/dismo/man/bioclim.html). 
 
-### Using your own data
+## Using your own data
 
-If you chose your own data for this workshop, the data should meet some criteria:
+If you chose your own data for this workshop, the data should meet these criteria:
 
 * You should be familiar with the data, how it's formatted, and what the variables and values mean.
 
-* 
+* The data should be geospatial and a vector format.
+
+[//]: # (Can they use their own raster too?)
+
+
+### Places to find data?
+
+* [Geodata@Wisconsin](https://geodata.wisc.edu/)
+* [BTAA Geoportal](https://geo.btaa.org/)
+*  
+
 
 {% include links.md %}
