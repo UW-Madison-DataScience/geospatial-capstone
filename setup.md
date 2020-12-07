@@ -13,6 +13,13 @@ the full workshop to install the necessary software.
 
 ## Data
 
+You can chose to use your own data or download and use sample data for this workshop.
+Sample data includes climate data to complement the environmental data used in the main workshop.
+If you use your own data, there are some criteria to
+help you succeed in completing the learning objectives.
+
+### Sample Data
+
 The capstone project uses data from the U.S. Department of Agriculture Natural Resources
 Conservation Service (NRCS).
 [Click here to visit the NRCS Geospatial Data Gateway](https://gdg.sc.egov.usda.gov/GDGOrder.aspx).
@@ -46,11 +53,19 @@ The data will download as a  compressed (`.zip`) file.
 Expand/unzip this file and
 move the contents into the data directory of your GeospatialCarp project.
 
-## Other data
+[//]: # (Are they creating a separate project for this??)
 
 Other data used in the capstone project will be downloaded using R scripts.
 This data includes the BIOCLIM dataset.
 You can read more about the BIOCLIM dataset
 [here](https://rdrr.io/cran/dismo/man/bioclim.html). 
+
+### Using your own data
+
+If you chose your own data for this workshop, the data should meet some criteria:
+
+* You should be familiar with the data, how it's formatted, and what the variables and values mean.
+
+* 
 
 {% include links.md %}
