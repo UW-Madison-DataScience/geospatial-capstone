@@ -7,9 +7,13 @@ title: Setup
 This page will guide you through the setup for the Geospatial Data Carpentry workshop capstone
 project.
 
-If you have not completed the workshop setup, you should do that before starting the capstone setup.
-Visit the [Setup Page](https://uw-madison-datascience.github.io/geospatial-workshop/setup.html) of
-the [full workshop website]() to install the necessary software.
+> ## Callout Title
+>
+> If you have not completed the workshop setup, you should do that before starting the capstone setup.
+> Visit the [Setup Page](https://uw-madison-datascience.github.io/geospatial-workshop/setup.html) of
+> the [full workshop website]() to install the necessary software.
+> {: .source}
+{: .prereq}
 
 ## Data
 
