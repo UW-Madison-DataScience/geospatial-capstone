@@ -77,7 +77,20 @@ jobs:
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "18.04"), sep = "\n")')
 
-      - run: make site
+      - name: Build site
+        run: make site
+      - name: Setup Git
+        if steps.check-rmd.outputs.count != 0:
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git status
+      - name: Push site
+        if: steps.check-rmd.outputs.count != 0 && ${{ github.event }} == "push":
+        run: |
+          git add _episodes/
+          git commit -m "GH ACTION --- render markdown files"
+          git push -q
       - run: make lesson-check
         if: always()
       - run: make lesson-check-all
