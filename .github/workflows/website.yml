@@ -7,7 +7,10 @@ on:
   
 jobs:
   build-website:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest    
+    env:
+      RSPM: "https://packagemanager.rstudio.com/cran/__linux__/bionic/latest"
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }} 
     defaults:
       run:
         shell: bash
@@ -88,7 +91,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           git status
       - name: Push site
-        if: ${{ steps.check-rmd.outputs.count != 0}}
+        if: ${{ github.event.pull_request.merged == 'true' && steps.check-rmd.outputs.count != 0 }}
         run: |
           git add _episodes/ fig/
           git commit -m "GH ACTION --- render markdown files"
