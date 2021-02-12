@@ -17,6 +17,9 @@ project.
 
 ## Set up a new project to store capstone code and data
 
+The main workshop has you create a project called GeospatialCarp.
+For the capstone, you will create a second project called GeospatialCapstone.
+
 ## Data
 
 You can follow along with the capstone project using the capstone data provided or
