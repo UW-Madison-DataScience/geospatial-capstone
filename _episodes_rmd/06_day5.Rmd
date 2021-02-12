@@ -1,0 +1,25 @@
+---
+title: "Day 6"
+teaching: 0
+exercises: 0
+questions:
+- "change"
+objectives:
+- "change"
+keypoints:
+- "First key point. Brief Answer to questions. (FIXME)"
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../bin/chunk-options.R")
+knitr_fig_path("03-")
+```
+
+
+- Addressing Minute questions (10-15 min)
+- Use csv to add in points for each county (we would need to create these points ahead) - these points could be precipitation collection spots, weather forecasting locations, centroids?, major cities?
+- Take raster data and crop with vector or point and vector and summarize stats.  Question for them to solve.  Mean temp diff for two cities?  Max precipitation of every county?
+- Using last question to also talk about pros/cons of raster vector data with answering questions like these
+- Wrap up (10-15 min)
