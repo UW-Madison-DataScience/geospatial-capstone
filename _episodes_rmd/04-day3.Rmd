@@ -1,0 +1,88 @@
+---
+title: "Day 3: Introduction to Raster Data"
+teaching: 0
+exercises: 0
+questions:
+- "Raster math (subtract, average over month?)"
+objectives:
+- "TODO"
+keypoints:
+- "TODO"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+solutions <- FALSE
+source("../bin/chunk-options.R")
+knitr_fig_path("04-")
+```
+
+
+## Load in the precipitation raster for Wisconsin and explore the raster. Plot the raster and describe the patterns you observe.
+
+
+> ## Solution
+> ```{r}
+> precip <- raster("../data/precip_annual_wi.tif")
+> summary(precip)
+>
+> precip_df <- as.data.frame(precip, xy=TRUE)
+> ggplot() +
+>  geom_raster(data=precip_df,
+>              aes(x=x, y=y,fill=precip_annual_wi))+
+>  scale_fill_viridis_c() +
+>  coord_quickmap()
+> ```
+> Annual precipitation is highest near the Illinois border and near Iron county. It is lowest near Douglas and Washburn county.
+{: .solution}
+
+
+
+## Load in the maximum and minimum temperature rasters  for Wisconsin. Subtract the minimum temperature from the maximum temperature using the `overlay()` function and plot your results. Note what you observe.
+
+
+> ## Solution
+> ```{r}
+> mintemp <- raster("../data/mintemp_monthcold_wi.tif")
+> maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
+> 
+> diff <- overlay(maxtemp, mintemp,
+>                        fun = function(r1, r2) { return( r1 - r2) })
+> 
+> diff_df <- as.data.frame(diff, xy=TRUE)
+> 
+> ggplot() +
+>   geom_raster(data = diff_df, 
+>               aes(x = x, y = y, fill = layer)) + 
+>   scale_fill_gradientn(name = "Temperature Difference", colors = terrain.colors(10)) + 
+>   coord_quickmap()
+> ```
+> Near Lake Michigan, the difference between maximum and minimum temperature was lowest, again possibly due to the lake effect. The largest differences in maximum and minimum temperatures was near the Minnesota border.
+{: .solution}
+
+
+
+
+## Use the `overlay()` function again to calculate the average temperature, using the maximum and minimum temperature rasters. Plot your results and note what you observe.
+
+
+> ## Solution
+> ```{r}
+> avg <- overlay(maxtemp, mintemp, 
+>               fun = function(r1, r2) { return( (r1 + r2)/2) })
+> #alternative:
+> #avg <- overlay(maxtemp, mintemp, fun = mean)
+>
+> avg_df <- as.data.frame(avg, xy=TRUE)
+> 
+> ggplot() +
+>   geom_raster(data = avg_df, 
+>               aes(x = x, y = y, fill = layer)) + 
+>   scale_fill_gradientn(name = "Temperature Average", colors = terrain.colors(10)) + 
+>   coord_quickmap()
+> ```
+> The average temperatures are higher toward the Illinois border and lower up north.
+{: .solution}
+
+
+
