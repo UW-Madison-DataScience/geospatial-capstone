@@ -17,9 +17,95 @@ source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 ```
 
-
+# Outline
 - Addressing Minute questions (10-15 min)
-- Use csv to add in points for each county (we would need to create these points ahead) - these points could be precipitation collection spots, weather forecasting locations, centroids?, major cities?
-- Take raster data and crop with vector or point and vector and summarize stats.  Question for them to solve.  Mean temp diff for two cities?  Max precipitation of every county?
-- Using last question to also talk about pros/cons of raster vector data with answering questions like these
-- Wrap up (10-15 min)
+- Revisit your spatial question
+- Add point data from a non-spatial CSV file (thoughts:Use csv to add in points for each county (we would need to create these points ahead) - these points could be precipitation collection spots, weather forecasting locations, centroids?, major cities?)
+- Crop raster data with vector data and output summary information (thoughts:Take raster data and crop with vector or point and vector and summarize stats.  Question for them to solve.  Mean temp diff for two cities?  Max precipitation of every county?)
+- Thing to highlight: Using last question to also talk about pros/cons of raster vector data with answering questions like these
+- Addressing final questions (10-15 min)
+
+
+# Revisit your spatial question
+
+On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with rater data, and separately, questions you could answer with vector data. Through this workshop you have practiced worked with spatial data and have the tools to answer your questions.
+
+In this final day we will implement tools you learned for combining rater and vector data and the types of questions you can answer when doing so.
+
+These questions may look like the following:
++ where does something occur?
++ how does something change across space or time?
++ what are the differences between locations?
+
+Examples of questions are:
++ What county has the highest recorded precipitation?
++ Has mean annual temperature increased in the state?
++ How does the precipitation vary between Milwaukee and Madison?
+
+For this 
+
+# Import your spatial data
+Start by importing your spatial data. Remember, for raster data, you will likely use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will want to visualize our data, we will use the plotting package `ggplot2`.
+
+```{r load package}
+
+library(raster)
+library(sf)
+library(ggplot2)
+
+```
+
+## question for group
+What is a good example question to do? Like what are their lessons focused on and can I expand on things they are already showing?
+
+
+## Raster data
+For this example, we will use the XX dataset.
+
+```{r load-raster-data}
+
+```
+
+
+## Vector data
+For this example, we will use the XX dataset.
+
+In addition, we will also import city point locations.
+
+## question for group
+does Stephen need to know about my csv file? where to put that? add to the set up data folder? any other data used in an example capstone will need to go in that folder as well.
+
+```{r load-vector-data}
+
+
+
+```
+
+Recall from your lesson how to import point data and convert it to a spatial data layer in R.
+
+> ## Solution: Load .csv point data?
+>
+> Text here describing what's in this box
+>
+>
+> > ## Solution
+> >
+> > ```{r, echo=FALSE}
+> > paste("This", "new", "template", "looks", "good")
+> > ```
+> {: .solution}
+
+
+
+```{r load-city-point-data}
+
+
+
+
+```
+
+
+
+
+
+
