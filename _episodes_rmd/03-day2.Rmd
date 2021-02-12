@@ -3,20 +3,22 @@ title: "Day 2: Introduction to Raster Data"
 teaching: 0
 exercises: 0
 questions:
-- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin"
+- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin.  Reproject the maxtemp raster into UTM coordinates"
 objectives:
-- "Importing raster data; checking coordinate reference system"
+- "Importing raster data; checking coordinate reference system; converting crs"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "TODO"
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 solutions <- FALSE
+source("../bin/chunk-options.R")
+knitr_fig_path("03-")
 ```
 
-##Load in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and explore using the `summary()` function.
+
+## Load in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and explore using the `summary()` function.
 
 
 
