@@ -16,65 +16,69 @@ knitr::opts_chunk$set(echo = TRUE)
 solutions <- FALSE
 ```
 
-##Load in and explore the maximum and minimum temperature rasters for Wisconsin.
-
-```{r, echo=solutions, include=solutions}
-library(raster)
-library(ggplot2)
-library(rgdal)
-```
+##Load in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and explore using the `summary()` function.
 
 
 
-```{r, echo=solutions, include=solutions}
-mintemp <- raster("../data/mintemp_monthcold_wi.tif")
-summary(mintemp)
-```
+> ## Solution
+> ```{r, eval=TRUE}
+> library(raster)
+> library(ggplot2)
+> library(rgdal)
+> mintemp <- raster("../data/mintemp_monthcold_wi.tif")
+> summary(mintemp)
+> maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
+> summary(maxtemp)
+> ```
+{: .solution}
 
 
-```{r, echo=solutions, include=solutions}
-maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
-summary(maxtemp)
-```
 
 
-##Are the coordinate reference systems the same in these two rasters?
+## Use the `crs()` function to check if the coordinate reference systems the same in these two rasters?
 
-```{r, echo=solutions, include=solutions}
-mintemp
-maxtemp
 
-#or
+> ## Solution
+> ```{r, eval=TRUE}
+> mintemp
+> maxtemp
+> ```
+> OR
+> 
+> ```{r, eval=TRUE}
+> crs(mintemp)
+> crs(maxtemp)
+> ```
+> 
+> Yes, the CRS for both rasters is the same. Both are in longlat projection, datum WGS84.
+{: .solution}
 
-crs(mintemp)
-crs(maxtemp)
-```
 
-Yes, the CRS for both rasters is the same. Both are in longlat projection, datum WGS84.
 
-##Create visualizations of both minimum and maximum temperature rasters using `ggplot2`
+##Create visualizations of both minimum and maximum temperature rasters using the `ggplot2` package.
 
-```{r, echo=solutions, include=solutions}
-mintemp_df <- as.data.frame(mintemp, xy=TRUE)
-maxtemp_df <- as.data.frame(maxtemp, xy=TRUE)
 
-ggplot() +
-    geom_raster(data = mintemp_df , aes(x = x, y = y, fill = mintemp_monthcold_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap()
-ggsave("03-day2-mintempraster.png", path="../fig/")
-
-ggplot() +
-    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap()
-ggsave("03-day2-maxtempraster.png", path="../fig/")
-
-```
+> ## Solution
+> ```{r, eval=TRUE}
+> mintemp_df <- as.data.frame(mintemp, xy=TRUE)
+> maxtemp_df <- as.data.frame(maxtemp, xy=TRUE)
+> 
+> ggplot() +
+>    geom_raster(data = mintemp_df , aes(x = x, y = y, fill = mintemp_monthcold_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap()
+>
+> ggplot() +
+>    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap()
+> ```
+{: .solution}
 
 ###Bonus
 
 You can add the following aesthetics to a `ggplot` to customize the backgrounds, axis labels, title, legend label, and move the legend position to the bottom of the plot:
+
 
 
 ```{r, eval=FALSE}
@@ -88,18 +92,25 @@ ggplot() +
 
 Explore what these aesthetics do with your plot of maximum monthly temperature.
 
-```{r, echo=solutions, include=solutions}
-ggplot() +
-    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap() +
-    labs(title = "Maximum Monthly Temperature: WI", x="Longitude", y="Latitude", fill="Max. Temp (C)") +
-    theme_bw() +
-    theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom")
-ggsave("03-day2-maxtempraster-sol.png", path="../fig/")
 
-```
+> ## Solution
+> ```{r}
+> ggplot() +
+>    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap() +
+>    labs(title = "Maximum Monthly Temperature: WI", x="Longitude", y="Latitude", fill="Max. Temp (C)") +
+>    theme_bw() +
+>    theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom")
+> ```
+{: .solution}
+
 
 
 
 ## Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
+
+> ## Solution
+> Warmer temperatures are in Wisconsin tend toward the lower half of the state and nearer to the Minnesota border. Colder temperatures tend toward the North and near Lake Michigan, possibly due to the lake effect
+>
+{: .solution}
