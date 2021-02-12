@@ -114,3 +114,13 @@ Explore what these aesthetics do with your plot of maximum monthly temperature.
 > Warmer temperatures are in Wisconsin tend toward the lower half of the state and nearer to the Minnesota border. Colder temperatures tend toward the North and near Lake Michigan, possibly due to the lake effect
 >
 {: .solution}
+
+## Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `
+
+> ## Solution
+> ```{r}
+> maxtemp_utm <- projectRaster(maxtemp, crs=" +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 ")
+> crs(maxtemp_utm)
+> crs(maxtemp)
+> ```
+{: .solution}
