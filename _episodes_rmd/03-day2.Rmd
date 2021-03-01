@@ -20,7 +20,9 @@ knitr_fig_path("03-")
 ```
 
 
-## 1) Load in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and explore using the `summary()` function.
+## 1 - Load and summarize
+
+Practice the first steps of using data by loading in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and then exploring using the `summary()` function.
 
 
 
