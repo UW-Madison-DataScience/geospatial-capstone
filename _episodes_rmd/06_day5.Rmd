@@ -9,7 +9,7 @@ objectives:
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
-
+ # reminder for me - comment out lines 16 and 17 when knitting locally
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -42,7 +42,11 @@ Examples of questions are:
 + Has mean annual temperature increased in the state?
 + How does the precipitation vary between Milwaukee and Madison?
 
-For this 
+For this final day, you may work on your own capstone question using your data. If you do not have your own question or data, you can follow along with the example question for today.
+
+# Day 5 capstone sample question
+Does it get hotter in Milwaukee or Madison?
+
 
 # Import your spatial data
 Start by importing your spatial data. Remember, for raster data, you will likely use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will want to visualize our data, we will use the plotting package `ggplot2`.
@@ -55,33 +59,52 @@ library(ggplot2)
 
 ```
 
-## question for group
-What is a good example question to do? Like what are their lessons focused on and can I expand on things they are already showing?
-
 
 ## Raster data
-For this example, we will use the XX dataset.
+For this example, we will use the World Climate dataset. You can either download this dataset from the website. Or you can access the dataset using the R package.
+
+If you need a refresher on how to do this, look at this website: https://www.gis-blog.com/r-raster-data-acquisition/ 
+
+The goal of this section is to have your raster data as a 'Formal class RasterLayer' in your Global Environment
 
 ```{r load-raster-data}
+
+# get worldclim data, variable "bio" with a 10 degree resolution
+worldClim_bio_global <- getData("worldclim", var="bio", res=10)
+
+# use only the bio5 variable (BIO5 = Max Temperature of Warmest Month)
+plot(worldClim_bio_global$bio5)
+
+maxTemp_global <- worldClim_bio_global$bio5
+
 
 ```
 
 
 ## Vector data
-For this example, we will use the XX dataset.
+For this example, we will use the Natual Earth Populated Places dataset. You can access these data from the Natural Earth package, or download the data from the website.
 
-In addition, we will also import city point locations.
-
-## question for group
-does Stephen need to know about my csv file? where to put that? add to the set up data folder? any other data used in an example capstone will need to go in that folder as well.
-
-```{r load-vector-data}
+The goal of this section is to have a simple feature ('sf') data frame type of object in your Global Environment.
 
 
+```{r load-city-point-data}
+
+# import point data from a csv file
+WIcities <- read.csv("data/ne_10m_populated_places_Wisconsin.csv")
+
+# check out the data
+colnames(WIcities)
 
 ```
 
 Recall from your lesson how to import point data and convert it to a spatial data layer in R.
+
+When looking at the column names we see that there is a lot of data! To convert to a spatial points data layer, we need to know information about the coordinate system and the coordinates for each point.
+
+The column names 'LATITUDE' and 'LONGITUDE' have what we need! 
+
+Explain how we know about the coordinate system because of these coordinates.
+Reference this website: https://spatialreference.org/ref/epsg/wgs-84/ 
 
 > ## Solution: Load .csv point data?
 >
@@ -95,17 +118,66 @@ Recall from your lesson how to import point data and convert it to a spatial dat
 > > ```
 > {: .solution}
 
+```{r convert-to-points}
+
+# convert data framem to sf type of object by specifying coordinates (as xy) and the projection as a crs and epsg code
+WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=4326)
+
+# check class of object - should be "sf" data frame
+class(WIcities_points)
 
 
-```{r load-city-point-data}
+```
 
+A critical part of working with raster and vector data together is that the dataasets are in the same coordinate system. 
 
+Does it make sense? Are they the same?
 
+```{r check-coordinate-systems}
+
+st_crs(maxTemp_global)
+st_crs(WIcities_points)
+
+extent(maxTemp_global)
+extent(WIcities_points)
+
+res(maxTemp_global)
+
+# quick plot of raster and vector data
+plot(maxTemp_global)
+plot(WIcities_points,add=T)
 
 ```
 
 
 
+Finally, let's subset our spatial data to only include the city points we are interested in. For the sample dataset, we are going to subset the data to only include the cities of Madison and Milwaukee.
+
+If you are using your own data, you may or may not need to do this set.
+
+```{r subset-vector-data}
+
+WIcities_points$NAME
+
+MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAME=='Milwaukee',]
+
+```
+
+
+# Summarize raster data by vector locations
+Now that we have our raster layer that contains the data we want to summarize, and the vector data that contains the locations indicating where we want to summarize the data, we can now put them together.
+
+If you are working with your own data, ask yourself:
++ How do I want to summarize the data? For example, do I want a single mean value? A maximum? A distribution of all values?
++ What is the area I want to summarize? If it's a point, do you want a certain distance around the point? Or, if it's an area, you will include all of the raster values within that area.
+
+```{r extract-raster-by-vector}
+
+maxTemp_Madison <- extract(x=maxTemp_global,
+                           y=MM_points[MM_points$NAME=='Madison',],
+                           buffer=100)
+
+```
 
 
 
