@@ -6,7 +6,11 @@ questions:
 objectives:
 - "Importing raster data; checking coordinate reference system; converting crs"
 keypoints:
-- "Always explore your raster first using the summary() and crs() functions. To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE. You may need to reproject your raster, for which you can use the projectRaster() function. There are many plotting and aesthetics options in the ggplot2 package for you to explore."
+- "Always explore your raster first using the summary() and crs() functions."
+- "To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE."
+- "You may need to reproject your raster, for which you can use the projectRaster() function."
+- "There are many plotting and aesthetics options in the ggplot2 package for you to explore."
+
 ---
 
 ```{r setup, include=FALSE}
