@@ -1,28 +1,29 @@
 ---
 title: "Day 3: Introduction to Raster Data"
-teaching: 0
-exercises: 0
+exercises: 3
 questions:
-- "Raster math (subtract, average over month?)"
+- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters. Use raster math to subtract the minimum temperature from the maximum temperature. Use raster math to calculate the average temperature."
 objectives:
-- "TODO"
+- "Importing and exploring multiple rasters; developing initial geospatial insights; using raster math for calculating different summary statistics."
 keypoints:
-- "TODO"
+- "Always explore your data and note initial geospatial insights. The overlay() function can be used to calculate different summary statistics for your raster and you can begin to develop your skills in writing functions."
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-solutions <- FALSE
 source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 ```
 
 
-## Load in the precipitation raster for Wisconsin and explore the raster. Plot the raster and describe the patterns you observe.
+## 1) Load in the precipitation raster for Wisconsin and explore the raster. Plot the raster and describe the patterns you observe.
 
 
 > ## Solution
-> ```{r}
+> ```{r, eval=TRUE}
+> library(raster)
+> library(ggplot2)
+> library(rgdal)
 > precip <- raster("../data/precip_annual_wi.tif")
 > summary(precip)
 >
@@ -38,11 +39,11 @@ knitr_fig_path("04-")
 
 
 
-## Load in the maximum and minimum temperature rasters  for Wisconsin. Subtract the minimum temperature from the maximum temperature using the `overlay()` function and plot your results. Note what you observe.
+## 2) Load in the maximum and minimum temperature rasters  for Wisconsin. Subtract the minimum temperature from the maximum temperature using the `overlay()` function and plot your results. Note what you observe.
 
 
 > ## Solution
-> ```{r}
+> ```{r, eval=TRUE}
 > mintemp <- raster("../data/mintemp_monthcold_wi.tif")
 > maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
 > 
@@ -63,11 +64,11 @@ knitr_fig_path("04-")
 
 
 
-## Use the `overlay()` function again to calculate the average temperature, using the maximum and minimum temperature rasters. Plot your results and note what you observe.
+## 3) Use the `overlay()` function again to calculate the average temperature, using the maximum and minimum temperature rasters. Plot your results and note what you observe.
 
 
 > ## Solution
-> ```{r}
+> ```{r, eval=TRUE}
 > avg <- overlay(maxtemp, mintemp, 
 >               fun = function(r1, r2) { return( (r1 + r2)/2) })
 > #alternative:
