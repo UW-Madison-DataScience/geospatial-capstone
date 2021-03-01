@@ -21,9 +21,11 @@ knitr_fig_path("03-")
 In this capstone lesson, we will be 2 Wisconsin rasters of 1) maximum temperature and 2) minimum temperature. If you are using your own data, please identify 2 different rasters that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate a geospatial workflow of loading, summarizing, and plotting rasters as well as checking the CRS and projecting.
 
 
+
 ## 1) Load and summarize
 
-Load in the maximum and minimum temperature rasters for Wisconsin using the `raster()` function and explore using the `summary()` function.
+Practice the first steps of using data by loading in the maximum and minimum temperature rasters for Wisconsin using the `raster()` function and then exploring using the `summary()` function.
+
 
 
 
