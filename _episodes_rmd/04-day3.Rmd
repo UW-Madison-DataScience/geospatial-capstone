@@ -2,11 +2,13 @@
 title: "Day 3: Introduction to Raster Data"
 exercises: 3
 questions:
-- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters. Use raster math to subtract the minimum temperature from the maximum temperature. Use raster math to calculate the average temperature."
+- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters and perform raster math."
 objectives:
-- "Importing and exploring multiple rasters; developing initial geospatial insights; using raster math for calculating different summary statistics."
+- "Import and explore multiple rasters and develop initial geospatial insights.  Use raster math to to calculate different summary statistics."
 keypoints:
-- "Always explore your data and note initial geospatial insights. The overlay() function can be used to calculate different summary statistics for your raster and you can begin to develop your skills in writing functions."
+- "Always explore your data and note initial geospatial insights."
+- "The overlay() function can be used to calculate different summary statistics for your raster."
+- "With the overlay() function, you can begin to develop your skills in writing functions."
 ---
 
 ```{r setup, include=FALSE}
@@ -16,8 +18,13 @@ knitr_fig_path("04-")
 ```
 
 
-## 1) Load in the precipitation raster for Wisconsin and explore the raster. Plot the raster and describe the patterns you observe.
+In this capstone lesson, we will be 3 Wisconsin rasters of 1) precipitation, 2) maximum temperature, 3) minimum temperature. We will be using the precipitation raster to review plotting rasters using ggplot() and maximum and minimum temperature rasters to perform raster math on. If you are using your own data, please identify at least 2 different rasters that you can use to perform raster math on - you can use the same raster to perform the raster plotting in part (1). The learning objectives of this capstone are to review importing plotting rasters with the ggplot2 package and developing initial geospatial insights, to use the `overlay()` function to calculate summary statistics of your two rasters, and to reinforce writing functions in the `overlay()` function.
 
+
+## 1) Load, summarize, and visualize
+
+
+Load in the precipitation raster for Wisconsin and explore the raster. Plot the raster and describe the patterns you observe.
 
 > ## Solution
 > ```{r, eval=TRUE}
@@ -34,12 +41,15 @@ knitr_fig_path("04-")
 >  scale_fill_viridis_c() +
 >  coord_quickmap()
 > ```
+> 
 > Annual precipitation is highest near the Illinois border and near Iron county. It is lowest near Douglas and Washburn county.
 {: .solution}
 
 
 
-## 2) Load in the maximum and minimum temperature rasters  for Wisconsin. Subtract the minimum temperature from the maximum temperature using the `overlay()` function and plot your results. Note what you observe.
+## 2) Raster math using `overlay()`: calculating the difference
+
+Load in the maximum and minimum temperature rasters  for Wisconsin. Subtract the minimum temperature from the maximum temperature using the `overlay()` function and plot your results. Note what you observe.
 
 
 > ## Solution
@@ -58,13 +68,16 @@ knitr_fig_path("04-")
 >   scale_fill_gradientn(name = "Temperature Difference", colors = terrain.colors(10)) + 
 >   coord_quickmap()
 > ```
+> 
 > Near Lake Michigan, the difference between maximum and minimum temperature was lowest, again possibly due to the lake effect. The largest differences in maximum and minimum temperatures was near the Minnesota border.
 {: .solution}
 
 
 
 
-## 3) Use the `overlay()` function again to calculate the average temperature, using the maximum and minimum temperature rasters. Plot your results and note what you observe.
+## 3) Raster math using `overlay()`: calculating the average
+
+Use the `overlay()` function again to calculate the average temperature, using the maximum and minimum temperature rasters. Plot your results and note what you observe.
 
 
 > ## Solution
@@ -82,6 +95,7 @@ knitr_fig_path("04-")
 >   scale_fill_gradientn(name = "Temperature Average", colors = terrain.colors(10)) + 
 >   coord_quickmap()
 > ```
+> 
 > The average temperatures are higher toward the Illinois border and lower up north.
 {: .solution}
 

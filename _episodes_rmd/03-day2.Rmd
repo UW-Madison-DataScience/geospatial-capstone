@@ -2,11 +2,14 @@
 title: "Day 2: Introduction to Raster Data"
 exercises: 5
 questions:
-- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin.  Reproject the maxtemp raster into UTM coordinates"
+- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? "
 objectives:
-- "Importing raster data; checking coordinate reference system; converting crs"
+- "Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin.  Reproject the maxtemp raster into UTM coordinates."
 keypoints:
-- "Always explore your raster first using the summary() and crs() functions. To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE. You may need to reproject your raster, for which you can use the projectRaster() function. There are many plotting and aesthetics options in the ggplot2 package for you to explore."
+- "Always explore your raster first using the summary() and crs() functions."
+- "To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE."
+- "You may need to reproject your raster, for which you can use the projectRaster() function."
+- "There are many plotting and aesthetics options in the ggplot2 package for you to explore."
 ---
 
 ```{r setup, include=FALSE}
@@ -15,8 +18,12 @@ source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 ```
 
+In this capstone lesson, we will be 2 Wisconsin rasters of 1) maximum temperature and 2) minimum temperature. If you are using your own data, please identify 2 different rasters that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate a geospatial workflow of loading, summarizing, and plotting rasters as well as checking the CRS and projecting.
 
-## 1) Load in the maximum and minimum temperature rasters  for Wisconsin using the `raster()` function and explore using the `summary()` function.
+
+## 1) Load and summarize
+
+Load in the maximum and minimum temperature rasters for Wisconsin using the `raster()` function and explore using the `summary()` function.
 
 
 
@@ -35,7 +42,9 @@ knitr_fig_path("03-")
 
 
 
-## 2) Use the `crs()` function to check if the coordinate reference systems the same in these two rasters?
+## 2) Check the CRS
+
+Use the `crs()` function to check if the coordinate reference systems the same in these two rasters?
 
 
 > ## Solution
@@ -55,19 +64,25 @@ knitr_fig_path("03-")
 
 
 
-## 3) Create visualizations of both minimum and maximum temperature rasters using the `ggplot2` package.
+## 3) Visualize
+
+Create visualizations of both minimum and maximum temperature rasters using the `ggplot2` package.
 
 
 > ## Solution
-> ```{r, eval=TRUE}
+> ```{r prep}
 > mintemp_df <- as.data.frame(mintemp, xy=TRUE)
 > maxtemp_df <- as.data.frame(maxtemp, xy=TRUE)
+> ```
 > 
+> ```{r mintemp}
 > ggplot() +
 >    geom_raster(data = mintemp_df , aes(x = x, y = y, fill = mintemp_monthcold_wi)) +
 >    scale_fill_viridis_c() +
 >    coord_quickmap()
+> ```
 >
+> ```{r maxtemp}
 > ggplot() +
 >    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
 >    scale_fill_viridis_c() +
@@ -75,7 +90,7 @@ knitr_fig_path("03-")
 > ```
 {: .solution}
 
-###Bonus
+### Bonus
 
 You can add the following aesthetics to a `ggplot` to customize the backgrounds, axis labels, title, legend label, and move the legend position to the bottom of the plot:
 
@@ -108,14 +123,21 @@ Explore what these aesthetics do with your plot of maximum monthly temperature.
 
 
 
-## 4) Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
+## 4) Develop insights
+
+Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
+
+
 
 > ## Solution
 > Warmer temperatures are in Wisconsin tend toward the lower half of the state and nearer to the Minnesota border. Colder temperatures tend toward the North and near Lake Michigan, possibly due to the lake effect
 >
 {: .solution}
 
-## 5) Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `
+## 5) Reproject
+
+Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `
+
 
 > ## Solution
 > ```{r}
