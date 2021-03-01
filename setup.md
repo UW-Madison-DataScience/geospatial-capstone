@@ -12,7 +12,8 @@ project.
 >
 > Software and packages used in this capstone are installed for the main workshop.
 > Visit the [Setup Page](https://uw-madison-datascience.github.io/geospatial-workshop/setup.html) of
-> the [full workshop website]() to install the necessary software before continuing.
+> the [full workshop website](https://uw-madison-datascience.github.io/geospatial-workshop/) to install the necessary
+> software before continuing.
 {: .prereq}
 
 ## Set up a new project to store capstone code and data
