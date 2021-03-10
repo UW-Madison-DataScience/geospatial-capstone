@@ -14,9 +14,11 @@ keypoints:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 solutions <- FALSE
+source("../bin/chunk-options.R")
+knitr_fig_path("03-")
 ```
 
-##Load in and explore the maximum and minimum temperature rasters for Wisconsin.
+## Load in and explore the maximum and minimum temperature rasters for Wisconsin.
 
 ```{r, echo=solutions, include=solutions}
 library(raster)
@@ -38,7 +40,7 @@ summary(maxtemp)
 ```
 
 
-##Are the coordinate reference systems the same in these two rasters?
+## Are the coordinate reference systems the same in these two rasters?
 
 ```{r, echo=solutions, include=solutions}
 mintemp
@@ -52,7 +54,7 @@ crs(maxtemp)
 
 Yes, the CRS for both rasters is the same. Both are in longlat projection, datum WGS84.
 
-##Create visualizations of both minimum and maximum temperature rasters using `ggplot2`
+## Create visualizations of both minimum and maximum temperature rasters using `ggplot2`
 
 ```{r, echo=solutions, include=solutions}
 mintemp_df <- as.data.frame(mintemp, xy=TRUE)
@@ -72,7 +74,7 @@ ggsave("03-day2-maxtempraster.png", path="../fig/")
 
 ```
 
-###Bonus
+### Bonus
 
 You can add the following aesthetics to a `ggplot` to customize the backgrounds, axis labels, title, legend label, and move the legend position to the bottom of the plot:
 
@@ -103,3 +105,4 @@ ggsave("03-day2-maxtempraster-sol.png", path="../fig/")
 
 
 ## Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
+
