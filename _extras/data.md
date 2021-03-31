@@ -22,11 +22,16 @@
 
 
 ## References:
-https://www.gis-blog.com/r-raster-data-acquisition/
-https://www.worldclim.org/
-https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/ 
-https://landscan.ornl.gov/ 
-https://www.wcc.nrcs.usda.gov/climate/prism.html 
+
+* https://www.gis-blog.com/r-raster-data-acquisition/
+
+* https://www.worldclim.org/
+
+* https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-populated-places/ 
+
+* https://landscan.ornl.gov/ 
+
+* https://www.wcc.nrcs.usda.gov/climate/prism.html 
 
 ## Code for creating mintemp/maxtemp/precipitation tifs:
 
