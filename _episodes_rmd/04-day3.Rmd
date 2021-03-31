@@ -18,7 +18,8 @@ knitr_fig_path("04-")
 ```
 
 
-In this capstone lesson, we will be 3 Wisconsin rasters of 1) precipitation, 2) maximum temperature, 3) minimum temperature. We will be using the precipitation raster to review plotting rasters using ggplot() and maximum and minimum temperature rasters to perform raster math on. If you are using your own data, please identify at least 2 different rasters that you can use to perform raster math on - you can use the same raster to perform the raster plotting in part (1). The learning objectives of this capstone are to review importing plotting rasters with the ggplot2 package and developing initial geospatial insights, to use the `overlay()` function to calculate summary statistics of your two rasters, and to reinforce writing functions in the `overlay()` function.
+In this capstone lesson, we will be 3 Wisconsin rasters of 1) precipitation, 2) maximum temperature, 3) minimum temperature. We will be using the precipitation raster to review plotting rasters using `ggplot()` and maximum and minimum temperature rasters to perform raster math on. If you are using your own data, please identify at least 2 different rasters that you can use to perform raster math on - you can use the same raster to perform the raster plotting in part (1). The learning objectives of this capstone are to review importing plotting rasters with the ggplot2 package and developing initial geospatial insights, to use the `overlay()` function to calculate summary statistics of your two rasters, and to reinforce writing functions in the `overlay()` function.
+
 
 
 ## 1) Load, summarize, and visualize
@@ -98,6 +99,5 @@ Use the `overlay()` function again to calculate the average temperature, using t
 > 
 > The average temperatures are higher toward the Illinois border and lower up north.
 {: .solution}
-
 
 
