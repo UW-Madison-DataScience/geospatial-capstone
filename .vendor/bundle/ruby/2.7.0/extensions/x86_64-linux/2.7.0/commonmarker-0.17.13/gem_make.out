@@ -1,5 +1,5 @@
 current directory: /home/runner/work/geospatial-capstone/geospatial-capstone/.vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
-/opt/hostedtoolcache/Ruby/2.7.2/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.2/x64/lib/ruby/2.7.0 -r ./siteconf20210331-17080-rm5b01.rb extconf.rb
+/opt/hostedtoolcache/Ruby/2.7.2/x64/bin/ruby -I /opt/hostedtoolcache/Ruby/2.7.2/x64/lib/ruby/2.7.0 -r ./siteconf20210331-17325-iipcbi.rb extconf.rb
 creating Makefile
 
 current directory: /home/runner/work/geospatial-capstone/geospatial-capstone/.vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker
@@ -243,5 +243,5 @@ make[1]: Entering directory '/home/runner/work/geospatial-capstone/geospatial-ca
 Makefile:260: warning: overriding recipe for target 'commonmarker.so'
 make[1]: Entering directory '/home/runner/work/geospatial-capstone/geospatial-capstone/.vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker'
 :260: warning: ignoring old recipe for target 'commonmarker.so'
-/usr/bin/install -c -m 0755 commonmarker.so ./.gem.20210331-17080-1swn8px/commonmarker
+/usr/bin/install -c -m 0755 commonmarker.so ./.gem.20210331-17325-2j8cu4/commonmarker
 make[1]: Leaving directory '/home/runner/work/geospatial-capstone/geospatial-capstone/.vendor/bundle/ruby/2.7.0/gems/commonmarker-0.17.13/ext/commonmarker'
