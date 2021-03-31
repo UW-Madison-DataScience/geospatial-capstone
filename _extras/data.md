@@ -91,5 +91,4 @@ writeRaster(mintemp_monthcold_wi, "../data/mintemp_monthcold_wi.tif", overwrite=
 writeRaster(precip_annual_wi, "../data/precip_annual_wi.tif", overwrite=TRUE)
 ```
 
-{% include carpentries.html %}
 {% include links.md %}
