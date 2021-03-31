@@ -1,82 +1,101 @@
 ---
 title: "Day 2: Introduction to Raster Data"
-teaching: 0
-exercises: 0
+exercises: 5
 questions:
-- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin"
+- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? "
 objectives:
-- "Importing raster data; checking coordinate reference system"
+- "Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin.  Reproject the maxtemp raster into UTM coordinates."
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Always explore your raster first using the summary() and crs() functions."
+- "To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE."
+- "You may need to reproject your raster, for which you can use the projectRaster() function."
+- "There are many plotting and aesthetics options in the ggplot2 package for you to explore."
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-solutions <- FALSE
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 ```
 
-## Load in and explore the maximum and minimum temperature rasters for Wisconsin.
-
-```{r, echo=solutions, include=solutions}
-library(raster)
-library(ggplot2)
-library(rgdal)
-```
+In this capstone lesson, we will be 2 Wisconsin rasters of 1) maximum temperature and 2) minimum temperature. If you are using your own data, please identify 2 different rasters that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate a geospatial workflow of loading, summarizing, and plotting rasters as well as checking the CRS and projecting.
 
 
 
-```{r, echo=solutions, include=solutions}
-mintemp <- raster("../data/mintemp_monthcold_wi.tif")
-summary(mintemp)
-```
+## 1) Load and summarize
+
+Practice the first steps of using data by loading in the maximum and minimum temperature rasters for Wisconsin using the `raster()` function and then exploring using the `summary()` function.
 
 
-```{r, echo=solutions, include=solutions}
-maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
-summary(maxtemp)
-```
 
 
-## Are the coordinate reference systems the same in these two rasters?
+> ## Solution
+> ```{r, eval=TRUE}
+> library(raster)
+> library(ggplot2)
+> library(rgdal)
+> mintemp <- raster("../data/mintemp_monthcold_wi.tif")
+> summary(mintemp)
+> maxtemp <- raster("../data/maxtemp_monthwarm_wi.tif")
+> summary(maxtemp)
+> ```
+{: .solution}
 
-```{r, echo=solutions, include=solutions}
-mintemp
-maxtemp
 
-#or
 
-crs(mintemp)
-crs(maxtemp)
-```
 
-Yes, the CRS for both rasters is the same. Both are in longlat projection, datum WGS84.
+## 2) Check the CRS
 
-## Create visualizations of both minimum and maximum temperature rasters using `ggplot2`
+Use the `crs()` function to check if the coordinate reference systems the same in these two rasters?
 
-```{r, echo=solutions, include=solutions}
-mintemp_df <- as.data.frame(mintemp, xy=TRUE)
-maxtemp_df <- as.data.frame(maxtemp, xy=TRUE)
 
-ggplot() +
-    geom_raster(data = mintemp_df , aes(x = x, y = y, fill = mintemp_monthcold_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap()
-ggsave("03-day2-mintempraster.png", path="../fig/")
+> ## Solution
+> ```{r, eval=TRUE}
+> mintemp
+> maxtemp
+> ```
+> OR
+> 
+> ```{r, eval=TRUE}
+> crs(mintemp)
+> crs(maxtemp)
+> ```
+> 
+> Yes, the CRS for both rasters is the same. Both are in longlat projection, datum WGS84.
+{: .solution}
 
-ggplot() +
-    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap()
-ggsave("03-day2-maxtempraster.png", path="../fig/")
 
-```
+
+## 3) Visualize
+
+Create visualizations of both minimum and maximum temperature rasters using the `ggplot2` package.
+
+
+> ## Solution
+> ```{r prep}
+> mintemp_df <- as.data.frame(mintemp, xy=TRUE)
+> maxtemp_df <- as.data.frame(maxtemp, xy=TRUE)
+> ```
+> 
+> ```{r mintemp}
+> ggplot() +
+>    geom_raster(data = mintemp_df , aes(x = x, y = y, fill = mintemp_monthcold_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap()
+> ```
+>
+> ```{r maxtemp}
+> ggplot() +
+>    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap()
+> ```
+{: .solution}
 
 ### Bonus
 
 You can add the following aesthetics to a `ggplot` to customize the backgrounds, axis labels, title, legend label, and move the legend position to the bottom of the plot:
+
 
 
 ```{r, eval=FALSE}
@@ -90,19 +109,42 @@ ggplot() +
 
 Explore what these aesthetics do with your plot of maximum monthly temperature.
 
-```{r, echo=solutions, include=solutions}
-ggplot() +
-    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
-    scale_fill_viridis_c() +
-    coord_quickmap() +
-    labs(title = "Maximum Monthly Temperature: WI", x="Longitude", y="Latitude", fill="Max. Temp (C)") +
-    theme_bw() +
-    theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom")
-ggsave("03-day2-maxtempraster-sol.png", path="../fig/")
 
-```
+> ## Solution
+> ```{r}
+> ggplot() +
+>    geom_raster(data = maxtemp_df , aes(x = x, y = y, fill = maxtemp_monthwarm_wi)) +
+>    scale_fill_viridis_c() +
+>    coord_quickmap() +
+>    labs(title = "Maximum Monthly Temperature: WI", x="Longitude", y="Latitude", fill="Max. Temp (C)") +
+>    theme_bw() +
+>    theme(plot.title = element_text(hjust = 0.5), legend.position = "bottom")
+> ```
+{: .solution}
 
 
 
-## Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
 
+## 4) Develop insights
+
+Describe what patterns you observe across the state for coldest and warmest monthly temperatures in Wisconsin. What do you hypothesize is the effect of Lake Michigan?
+
+
+
+> ## Solution
+> Warmer temperatures are in Wisconsin tend toward the lower half of the state and nearer to the Minnesota border. Colder temperatures tend toward the North and near Lake Michigan, possibly due to the lake effect
+>
+{: .solution}
+
+## 5) Reproject
+
+Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `
+
+
+> ## Solution
+> ```{r}
+> maxtemp_utm <- projectRaster(maxtemp, crs=" +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 ")
+> crs(maxtemp_utm)
+> crs(maxtemp)
+> ```
+{: .solution}
