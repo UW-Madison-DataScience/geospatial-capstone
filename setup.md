@@ -4,8 +4,8 @@ title: Setup
 
 ## Overview
 
-This page will guide you through the setup for the Geospatial Data Carpentry workshop capstone
-project.
+This page will guide you through the setup for the
+Geospatial Data Carpentry workshop capstone project.
 
 > ## Prerequisite
 >
@@ -26,7 +26,7 @@ You can follow along with the capstone project using the capstone data provided 
 using your own data you obtained elsewhere.
 
 Capstone data includes climate data to complement the environmental data used in the main workshop.
-If you use your own data, there are some criteria to
+If you use your own data, there are some criteria below to
 help you succeed in completing the learning objectives.
 
 You can download the capstone data by clicking [this download link](FIXME).
@@ -49,9 +49,9 @@ If you chose your own data for this workshop, the data should meet these criteri
 
 * You should be familiar with the data, how it's formatted, and what the variables and values mean.
 
-* The data should be geospatial and a vector format.
+* The data should be geospatial and in a vector format.
 
-### Places to find data?
+### Places to find data
 
 * [Geodata@Wisconsin](https://geodata.wisc.edu/)
 * [BTAA Geoportal](https://geo.btaa.org/)
