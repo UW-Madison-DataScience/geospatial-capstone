@@ -17,9 +17,10 @@ jobs:
         shell: bash
     steps:
       - name: Set up Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '2.7'
+          bundler-cache: true
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -62,7 +63,8 @@ jobs:
       - name: Install needed packages
         if: steps.check-rmd.outputs.count != 0
         run: |
-          install.packages(setdiff(c('remotes', 'rprojroot', 'renv', 'desc', 'rmarkdown', 'knitr'), rownames(installed.packages())))
+          packages = setdiff(c('remotes', 'rprojroot', 'renv', 'desc', 'rmarkdown', 'knitr'), rownames(installed.packages()))
+          install.packages(packages, repo="https://cran.rstudio.com/")
         shell: Rscript {0}
 
       - name: Query dependencies
