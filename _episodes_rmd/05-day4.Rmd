@@ -1,0 +1,135 @@
+---
+title: 'Day 4: Exploring Vector Data'
+output: html_document
+objectives:
+- "Importing vector data; exploring vector data through attributes and by plotting"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+source("../bin/chunk-options.R")
+knitr_fig_path("05-")
+```
+
+## Libraries 
+Load these libraries if you don't already have them (dplyr, ggplot2, sf, rgdal)
+```{r}
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(rgdal)
+```
+
+## Load vector files
+In this exercise, we have provided two vector data files: Wisconsin Annual Precipitation Average 1981-2010, and county outlines. You can work with these, or with your own vector datasets.
+```{r}
+wi_precip <- st_read("../data/precipitation/precip1981_2010_a_wi.shp")
+wi_county <- st_read("../data/WI_Counties2010/WI_Counties2010.shp")
+## County data is from here https://geo.btaa.org/catalog/4E677AF3-3FF2-43FA-8A58-3C345EC7F465
+```
+
+## Explore metadata
+We have worked with commands to explore the geometry type, and projection of vector data files. Examples include:`st_geometry_type`, `st_crs`,  `st_bbox` 
+Explore the metadata of the shapefiles. We will work towards comnining these files in the same plot. Are these files suited to being plotted together? 
+```{r}
+
+st_geometry_type(wi_precip)
+st_crs(wi_precip)$proj4string
+st_bbox(wi_precip)
+
+st_geometry_type(wi_county)
+st_crs(wi_county)$proj4string
+st_bbox(wi_county)
+
+```
+
+## Explore attributes. Identify attribute(s) of interest
+If you are working with our provided data, identify the attribute that appears to contain the precipitation data, and the attribute of county name. If you are working with your own data, choose an attribute of interest to work with for plotting.
+There are multiple ways to explore the attributes of a spatial data file. We have worked with the `names` function and previewing the first 6 rows with the `head` functions as well as viewing the file in RStudio's Environment tab, or printing the shapefile object to the screen.
+
+For a visual method to explore attributes, you can try the `plot` function built into sf. This plots a small map for each of the attributes. For example 
+`plot(wi_precip)`
+Notice that this plot command does not display data values
+```{r}
+plot(wi_precip)
+plot(wi_county)
+```
+
+## Using ggplot2 to plot data with selected attribute of interest
+If working with our data,  plot the precipitation shapefile using the atribute you identified as the precipitation data to set the fill. One way to do this is to use a fill aesthetic mapped to the column name of the attribute you identified `aes(fill = Use the attribute Column Name)`
+```{r}
+# Using aes in  ggplot2 
+ggplot() +
+  geom_sf(data = wi_precip, aes(fill = PrecipInch), size = 0.1) +
+  ggtitle("Wisconsin Annual Precipitation Average 1981 - 2010, In Inches") +
+  coord_sf()
+```
+
+## Discussion 
+What do you see? For example, where are the highest/lowest values, and are there patterns across the state? How many different categories are there?
+Notice the default colors and how they are associated with the data values. Do you think this color scale is a good choice for the data?
+Can you easily read the different color values on the plot, and connect them to the  value? Is the color range intuitive to understand? Could this be symbolized better?
+
+One option is to reverse the color range, so the darker colors correspond to higher values. Add the line `scale_fill_continuous(trans = 'reverse') +`
+```{r}
+#Plot a shapefile, reverse the colors
+ggplot() +
+  geom_sf(data = wi_precip, aes(fill = PrecipInch), size = 0.1) +
+  scale_fill_continuous(trans = 'reverse') +   ## reverses color scale     
+  ggtitle("Wisconsin Annual Precipitation Average 1981 - 2010, In Inches") +
+  coord_sf()
+```
+
+## Plot multiple vector shapefiles
+You can use ggplot2 to plot mutiple vector shapefiles layered in a single plot.
+```{r}
+ggplot() +
+  geom_sf(data = wi_precip, aes(fill = PrecipInch), size = 0.1) +
+  #scale_fill_manual(values = myColors)
+geom_sf(data = wi_county, fill = NA, color = gray(.5)) +  
+  scale_fill_continuous(trans = 'reverse') +        ## reverses color scale
+  ggtitle("Wisconsin Annual Precipitation Average 1981 - 2010, In Inches") +
+  coord_sf()
+```
+
+##Delete the default text below
+
+> ## Challenge Title
+>
+> This is the body of the challenge.
+>
+> ~~~
+> it may include some code
+> ~~~
+> {: .source}
+>
+> > ## Solution
+> >
+> > This is the body of the solution.
+> >
+> > ~~~
+> > it may also include some code
+> > ~~~
+> > {: .output}
+> {: .solution}
+{: .challenge}
+
+#### R Markdown ---- Delete the below default Markdown text
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
