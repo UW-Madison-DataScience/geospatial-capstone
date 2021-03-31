@@ -2,9 +2,10 @@
 title: "Day 3: Introduction to Raster Data"
 exercises: 3
 questions:
-- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters and perform raster math."
+- "What is the average of the minimum and maximum temperatures in Wisconsin and what patterns do you observe?"
 objectives:
 - "Import and explore multiple rasters and develop initial geospatial insights.  Use raster math to to calculate different summary statistics."
+- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters and perform raster math."
 keypoints:
 - "Always explore your data and note initial geospatial insights."
 - "The overlay() function can be used to calculate different summary statistics for your raster."
