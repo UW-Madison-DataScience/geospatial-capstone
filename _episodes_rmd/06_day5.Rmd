@@ -9,12 +9,11 @@ objectives:
 keypoints:
 - "First key point. Brief Answer to questions. (FIXME)"
 ---
- # reminder for me - comment out lines 16 and 17 when knitting locally
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("../bin/chunk-options.R")
-knitr_fig_path("03-")
+#source("../bin/chunk-options.R")
+#knitr_fig_path("03-")
 ```
 
 # Outline
@@ -70,6 +69,8 @@ The goal of this section is to have your raster data as a 'Formal class RasterLa
 ```{r load-raster-data}
 
 # get worldclim data, variable "bio" with a 10 degree resolution
+# this line is downloading data
+# if you selected a resolution higher than 10 (with a res of 0.5,2.5, or 5) it may take a while to download
 worldClim_bio_global <- getData("worldclim", var="bio", res=10)
 
 # use only the bio5 variable (BIO5 = Max Temperature of Warmest Month)
@@ -120,8 +121,8 @@ Reference this website: https://spatialreference.org/ref/epsg/wgs-84/
 
 ```{r convert-to-points}
 
-# convert data framem to sf type of object by specifying coordinates (as xy) and the projection as a crs and epsg code
-WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=4326)
+# convert data framem to sf type of object by specifying coordinates (as xy) and the projection as a crs
+WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=crs(maxTemp_global))
 
 # check class of object - should be "sf" data frame
 class(WIcities_points)
@@ -135,17 +136,16 @@ Does it make sense? Are they the same?
 
 ```{r check-coordinate-systems}
 
-st_crs(maxTemp_global)
-st_crs(WIcities_points)
+crs(maxTemp_global)
+crs(WIcities_points)
+
+crs(maxTemp_global)
+crs(WIcities_points)
 
 extent(maxTemp_global)
 extent(WIcities_points)
 
 res(maxTemp_global)
-
-# quick plot of raster and vector data
-plot(maxTemp_global)
-plot(WIcities_points,add=T)
 
 ```
 
@@ -163,6 +163,22 @@ MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAM
 
 ```
 
+# Crop raster data by vector locations
+
+UPDATE. Langugae about cropping. Why do this. We will crop to WI cities, then plot to see the data better.
+
+```{r crop-raster-by-vector}
+
+maxTemp_WI <- crop(x = maxTemp_global, y = extent(WIcities_points),snap="out")
+maxTemp_WI_df <- as.data.frame(maxTemp_WI, xy=T)
+
+ggplot() +
+  geom_raster(data = maxTemp_WI_df,aes(x = x, y = y, fill = bio5)) + 
+  geom_sf(data = MM_points,color="yellow",size=5) + 
+  coord_sf()
+
+```
+
 
 # Summarize raster data by vector locations
 Now that we have our raster layer that contains the data we want to summarize, and the vector data that contains the locations indicating where we want to summarize the data, we can now put them together.
@@ -171,11 +187,27 @@ If you are working with your own data, ask yourself:
 + How do I want to summarize the data? For example, do I want a single mean value? A maximum? A distribution of all values?
 + What is the area I want to summarize? If it's a point, do you want a certain distance around the point? Or, if it's an area, you will include all of the raster values within that area.
 
+One thing you'll need to consider is the converstion from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles. Here is an article: https://www.usgs.gov/faqs/how-much-distance-does-a-degree-minute-and-second-cover-your-maps?qt-news_science_products=0#qt-news_science_products 
+
 ```{r extract-raster-by-vector}
 
-maxTemp_Madison <- extract(x=maxTemp_global,
-                           y=MM_points[MM_points$NAME=='Madison',],
-                           buffer=100)
+# I'm exepcting a distibution but am getting a single value
+# does it have to do with the resolution and the buffer size?
+df_maxTemp_MM <- as.data.frame(extract(x=maxTemp_global,df=TRUE,
+                           y=MM_points,
+                           buffer=50000))
+
+# clean up data frame
+df_maxTemp_MM$ID <- as.factor(df_maxTemp_MM$ID)
+levels(df_maxTemp_MM$ID) = levels(as.factor(MM_points$NAME))
+
+df_maxTemp_MM$bio5 <- df_maxTemp_MM$bio5/10
+
+ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) + 
+  geom_histogram() +
+  ggtitle("Histogram of maximum temperatures within 50 km of the city") +
+  xlab("Maximum temperature (C)") + 
+  ylab("Frequency of Pixels")
 
 ```
 
