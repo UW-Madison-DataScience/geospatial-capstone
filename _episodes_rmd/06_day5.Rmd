@@ -197,12 +197,14 @@ df_maxTemp_MM <- as.data.frame(extract(x=maxTemp_global,df=TRUE,
                            y=MM_points,
                            buffer=50000))
 
-# clean up data frame
+# clean up data frame because we want to give IDs names and convert the temperature data
 df_maxTemp_MM$ID <- as.factor(df_maxTemp_MM$ID)
 levels(df_maxTemp_MM$ID) = levels(as.factor(MM_points$NAME))
 
 df_maxTemp_MM$bio5 <- df_maxTemp_MM$bio5/10
 
+# plot data
+# can make it prettier 
 ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) + 
   geom_histogram() +
   ggtitle("Histogram of maximum temperatures within 50 km of the city") +
