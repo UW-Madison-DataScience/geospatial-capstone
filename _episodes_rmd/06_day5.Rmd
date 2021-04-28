@@ -43,8 +43,10 @@ Examples of questions are:
 
 For this final day, you may work on your own capstone question using your data. If you do not have your own question or data, you can follow along with the example question for today.
 
-# Day 5 capstone sample question
-Does it get hotter in Milwaukee or Madison?
+# Capstone data question: Does it get hotter in Milwaukee or Madison?
+This question has us compare data in two locations. The data we need to answer this question are:
++ maximum temperature data for different locations in Wisconsin
++ spatial locations of Milwaukee and Madison
 
 
 # Import your spatial data
@@ -121,7 +123,7 @@ Reference this website: https://spatialreference.org/ref/epsg/wgs-84/
 
 ```{r convert-to-points}
 
-# convert data framem to sf type of object by specifying coordinates (as xy) and the projection as a crs
+# convert data frame to sf type of object by specifying coordinates (as xy) and the projection as a crs
 WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=crs(maxTemp_global))
 
 # check class of object - should be "sf" data frame
@@ -165,7 +167,7 @@ MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAM
 
 # Crop raster data by vector locations
 
-FIX ME. Langugae about cropping. Why do this. We will crop to WI cities, then plot to see the data better.
+It may be useful to crop the raster data by the vector data, especially if you have a large dataset and you know you will only need a small portion of it. For our capstone data, we loaded the global temperature data, but we are only interested in the data for Wisconsin, and specifically, the data for Milwaukee and Madison. Let's crop the temperature data to WI cities, then plot to see the data better.
 
 ```{r crop-raster-by-vector}
 
@@ -213,5 +215,5 @@ ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) +
 
 ```
 
-
+The graph above shows us the distribution of maximum temperatures within 50 km of Madison and Milwaukee. We have a distribution of values because the extracted data represents each individual pixel within the 50 km buffer. This graph shows us that the maximum temperatures recorded in the Madison are tend to be higher than the maximum temperatures recorded in the Milwaukee region. Does this pattern make sense with your knowledge of the area and the data? Remember, visualizing the data can be important in understanding and explaining patterns.
 
