@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with raster data, and separately, questions you could answer with vector data. Through this workshop you have practiced worked with spatial data and have the tools to answer your questions.
 
-In this final day we will implement tools you learned for combining rater and vector data and the types of questions you can answer when doing so.
+In this final day we will implement tools you learned for combining raster and vector data and the types of questions you can answer when doing so.
 
 These questions may look like the following:
 + where does something occur?
@@ -130,7 +130,7 @@ class(WIcities_points)
 
 ```
 
-A critical part of working with raster and vector data together is that the dataasets are in the same coordinate system. 
+A critical part of working with raster and vector data together is that the datasets are in the same coordinate system. 
 
 Does it make sense? Are they the same?
 
@@ -153,7 +153,7 @@ res(maxTemp_global)
 
 Finally, let's subset our spatial data to only include the city points we are interested in. For the sample dataset, we are going to subset the data to only include the cities of Madison and Milwaukee.
 
-If you are using your own data, you may or may not need to do this set.
+If you are using your own data, you may or may not need to do this subset.
 
 ```{r subset-vector-data}
 
@@ -165,7 +165,7 @@ MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAM
 
 # Crop raster data by vector locations
 
-UPDATE. Langugae about cropping. Why do this. We will crop to WI cities, then plot to see the data better.
+FIX ME. Langugae about cropping. Why do this. We will crop to WI cities, then plot to see the data better.
 
 ```{r crop-raster-by-vector}
 
