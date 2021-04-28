@@ -43,7 +43,7 @@ The file approximately 2MB.
 The data will download as a single compressed `.zip` file.
 Expand/unzip this file so that the data folder is within your `capstone` directory.
 
-For a full description of the data used in this workshop see the [data page](FIXME).
+For a full description of the data used in this workshop see the [data page](data).
 
 Other data used in the capstone project will be downloaded using R scripts.
 This data includes the BIOCLIM dataset.
