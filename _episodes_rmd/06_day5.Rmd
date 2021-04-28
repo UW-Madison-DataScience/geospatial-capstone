@@ -27,7 +27,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Revisit your spatial question
 
-On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with rater data, and separately, questions you could answer with vector data. Through this workshop you have practiced worked with spatial data and have the tools to answer your questions.
+On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with raster data, and separately, questions you could answer with vector data. Through this workshop you have practiced worked with spatial data and have the tools to answer your questions.
 
 In this final day we will implement tools you learned for combining rater and vector data and the types of questions you can answer when doing so.
 
