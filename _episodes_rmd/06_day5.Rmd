@@ -167,7 +167,7 @@ MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAM
 
 # Crop raster data by vector locations
 
-It may be useful to crop the raster data by the vector data, especially if you have a large dataset and you know you will only need a small portion of it. For our capstone data, we loaded the global temperature data, but we are only interested in the data for Wisconsin, and specifically, the data for Milwaukee and Madison. Let's crop the temperature data to WI cities, then plot to see the data better.
+It may be useful to limit the raster data to only areas of interest. This is helpful when you load a larger raster file, such as data for the entire globe, but are only interested in a small part. For our capstone data, we loaded the global temperature data, but we are only interested in the data for Wisconsin, and specifically, the data for Milwaukee and Madison. Let's use the `crop()` function in the `raster` package to cut out the maximum temperature data to only the area for the Wisconsin cities.
 
 ```{r crop-raster-by-vector}
 
