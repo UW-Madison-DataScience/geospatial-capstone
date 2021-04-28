@@ -20,6 +20,14 @@ project.
 The main workshop has you create a project called GeospatialCarp.
 For the capstone, you will create a second project called GeospatialCapstone.
 
+Open RStudio. Click File and then New Project.
+
+Next click New Directory and then New Project.
+
+Name the directory GeospatialCapstone and save it to your desktop or another convenient location.
+
+Move the data folder you downloaded as part of the setup into the Geospatial Capstone direcotry.
+
 ## Data
 
 You can follow along with the capstone project using the capstone data provided or
