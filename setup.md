@@ -20,6 +20,14 @@ project.
 The main workshop has you create a project called GeospatialCarp.
 For the capstone, you will create a second project called GeospatialCapstone.
 
+Open RStudio. Click File and then New Project.
+
+Next click New Directory and then New Project.
+
+Name the directory GeospatialCapstone and save it to your desktop or another convenient location.
+
+Move the data folder you downloaded as part of the setup into the Geospatial Capstone direcotry.
+
 ## Data
 
 You can follow along with the capstone project using the capstone data provided or
@@ -35,7 +43,7 @@ The file approximately 2MB.
 The data will download as a single compressed `.zip` file.
 Expand/unzip this file so that the data folder is within your `capstone` directory.
 
-For a full description of the data used in this workshop see the [data page](FIXME).
+For a full description of the data used in this workshop see the [data page](data).
 
 Other data used in the capstone project will be downloaded using R scripts.
 This data includes the BIOCLIM dataset.
@@ -54,7 +62,9 @@ If you chose your own data for this workshop, the data should meet these criteri
 ### Places to find data?
 
 * [Geodata@Wisconsin](https://geodata.wisc.edu/)
+
 * [BTAA Geoportal](https://geo.btaa.org/)
+
 * [Natural Earth Data](https://www.naturalearthdata.com/)
 
 {% include links.md %}
