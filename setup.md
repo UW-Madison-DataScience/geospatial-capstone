@@ -62,7 +62,9 @@ If you chose your own data for this workshop, the data should meet these criteri
 ### Places to find data?
 
 * [Geodata@Wisconsin](https://geodata.wisc.edu/)
+
 * [BTAA Geoportal](https://geo.btaa.org/)
+
 * [Natural Earth Data](https://www.naturalearthdata.com/)
 
 {% include links.md %}
