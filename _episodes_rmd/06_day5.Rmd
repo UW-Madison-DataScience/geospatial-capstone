@@ -93,7 +93,7 @@ The goal of this section is to have a simple feature ('sf') data frame type of o
 ```{r load-city-point-data}
 
 # import point data from a csv file
-WIcities <- read.csv("data/ne_10m_populated_places_Wisconsin.csv")
+WIcities <- read.csv("../data/ne_10m_populated_places_Wisconsin.csv")
 
 # check out the data
 colnames(WIcities)
