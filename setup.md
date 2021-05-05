@@ -33,12 +33,7 @@ This is where you will store rmd files.
 
 ## Data
 
-You can follow along with the capstone project using the capstone data provided or
-using your own data you obtained elsewhere.
-
-Capstone data includes climate data to complement the environmental data used in the main workshop.
-If you use your own data, there are some criteria to
-help you succeed in completing the learning objectives.
+Capstone data includes climate data to complement the environmental data used in the main workshop. If you would prefer to use your own data for the capstone, see the next section.
 
 You can download the capstone data by clicking [this download link](FIXME).
 The file approximately 2MB.
@@ -56,11 +51,19 @@ You can read more about the BIOCLIM dataset
 
 ## Using your own data
 
-If you chose your own data for this workshop, the data should meet these criteria:
+Advanced participants can replace some or all of the provided example data with their own data. Below are some tips for success:
 
-* You should be familiar with the data, how it's formatted, and what the variables and values mean.
+* Be familiar with the data, its formatting, and what variables and values mean.
 
-* The data should be geospatial and a vector format.
+* All data should have the same or similar geographic extents. If you plan to use a mix provided data with your own data, your data should cover Wisconsin.
+
+* Data should be georeferenced and projected. GeoTIFF format is recommended.
+
+* At least two raster variables are needed for raster math exercises. 
+
+* Continuous or surface raster data work the best. Classified data such as land use or land cover data will make it difficult to follow along.
+
+* Vector data should include one point dataset and one polygon dataset.
 
 ### Places to find data?
 
