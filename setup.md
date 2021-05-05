@@ -51,11 +51,11 @@ You can read more about the BIOCLIM dataset
 
 ## Using your own data
 
-Advanced participants can replace some or all of the provided example data with their own data. Below are some tips for success:
+Advanced participants can replace some or all of the capstone data with their own data. Below are some tips for success:
 
 * Be familiar with the data, its formatting, and what variables and values mean.
 
-* All data should have the same or similar geographic extents. If you plan to use a mix provided data with your own data, your data should cover Wisconsin.
+* All data should have the same or similar geographic extents. If you plan to use a mix capstone data with your data, your data should cover Wisconsin.
 
 * Data should be georeferenced and projected. GeoTIFF format is recommended.
 
