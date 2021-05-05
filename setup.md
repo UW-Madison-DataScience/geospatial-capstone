@@ -26,7 +26,10 @@ Next click New Directory and then New Project.
 
 Name the directory GeospatialCapstone and save it to your desktop or another convenient location.
 
-Move the data folder you downloaded as part of the setup into the Geospatial Capstone direcotry.
+Move the `data` folder you downloaded as part of the setup into the Geospatial Capstone direcotry.
+
+Create a second directory within the Geospatial Capstone directory called `reports`.
+This is where you will store rmd files.
 
 ## Data
 
