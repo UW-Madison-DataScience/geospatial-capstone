@@ -1,5 +1,5 @@
 ---
-title: "Day 6"
+title: "Day 5"
 teaching: 0
 exercises: 0
 questions:
@@ -17,42 +17,49 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Outline
-- Addressing Minute questions (10-15 min)
-- Revisit your spatial question
-- Add point data from a non-spatial CSV file (thoughts:Use csv to add in points for each county (we would need to create these points ahead) - these points could be precipitation collection spots, weather forecasting locations, centroids?, major cities?)
-- Crop raster data with vector data and output summary information (thoughts:Take raster data and crop with vector or point and vector and summarize stats.  Question for them to solve.  Mean temp diff for two cities?  Max precipitation of every county?)
-- Thing to highlight: Using last question to also talk about pros/cons of raster vector data with answering questions like these
-- Addressing final questions (10-15 min)
+
+- Addressing Minute questions (10-15 minutes)
+- Capstone lesson
+    1. Revisit your spatial question
+    2. Load libraries and import data
+    3. Crop raster with a vector
+    4. Summarize raster data by vector locations
+- Keypoints and final questions (10-15 minutes)
 
 
-# Revisit your spatial question
+# 1) Revisit your spatial question
 
-On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with raster data, and separately, questions you could answer with vector data. Through this workshop you have practiced worked with spatial data and have the tools to answer your questions.
+On day 1 we brainstormed questions you could ask with geospatial data. You thought about questions you can answer with raster data, and separately, questions you could answer with vector data. Through this workshop you have practiced working with spatial data and have the tools to answer your question.
 
 In this final day we will implement tools you learned for combining raster and vector data and the types of questions you can answer when doing so.
 
-These questions may look like the following:
+A spatial question may look like the following:
+
 + where does something occur?
 + how does something change across space or time?
 + what are the differences between locations?
 
-Examples of questions are:
+Examples of spatial questions are:
+
 + What county has the highest recorded precipitation?
 + Has mean annual temperature increased in the state?
 + How does the precipitation vary between Milwaukee and Madison?
 
-For this final day, you may work on your own capstone question using your data. If you do not have your own question or data, you can follow along with the example question for today.
+### Capstone data question: Does it get hotter in Milwaukee or Madison?
 
-# Capstone data question: Does it get hotter in Milwaukee or Madison?
-This question has us compare data in two locations. The data we need to answer this question are:
-+ maximum temperature data for different locations in Wisconsin
-+ spatial locations of Milwaukee and Madison
+In this capstone lesson we will use the following capstone data:
 
++ World Climate raster of maximum temperature (GeoTIFF)
++ Natural Earth populated places vector point data for cities in Wisconsin (csv)
 
-# Import your spatial data
-Start by importing your spatial data. Remember, for raster data, you will likely use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will want to visualize our data, we will use the plotting package `ggplot2`.
+We will use the vector data to crop the raster data to the extent of Wisconsin and summarize the raster data using the point locations of Madison and Milwaukee.
 
-```{r load package}
+*If you are using your own data*, please have raster and vector data that cover a similar geographic area. Since we are cropping the raster data by the vector data, it will work best if your vector data is of a smaller geographic area than the raster data.
+
+# 2) Load libraries and import data
+For raster data, we use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will visualize our data, we will use the plotting package `ggplot2`.
+
+```{r load package, message=FALSE}
 
 library(raster)
 library(sf)
@@ -61,7 +68,7 @@ library(ggplot2)
 ```
 
 
-## Raster data
+## Load raster data
 For this example, we will use the World Climate dataset. You can either download this dataset from the website. Or you can access the dataset using the R package.
 
 If you need a refresher on how to do this, look at this website: https://www.gis-blog.com/r-raster-data-acquisition/ 
@@ -84,7 +91,7 @@ maxTemp_global <- worldClim_bio_global$bio5
 ```
 
 
-## Vector data
+## Load vector data
 For this example, we will use the Natual Earth Populated Places dataset. You can access these data from the Natural Earth package, or download the data from the website.
 
 The goal of this section is to have a simple feature ('sf') data frame type of object in your Global Environment.
@@ -141,9 +148,6 @@ Does it make sense? Are they the same?
 crs(maxTemp_global)
 crs(WIcities_points)
 
-crs(maxTemp_global)
-crs(WIcities_points)
-
 extent(maxTemp_global)
 extent(WIcities_points)
 
@@ -165,7 +169,7 @@ MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAM
 
 ```
 
-# Crop raster data by vector locations
+# 3) Crop raster with vector 
 
 It may be useful to limit the raster data to only areas of interest. This is helpful when you load a larger raster file, such as data for the entire globe, but are only interested in a small part. For our capstone data, we loaded the global temperature data, but we are only interested in the data for Wisconsin, and specifically, the data for Milwaukee and Madison. Let's use the `crop()` function in the `raster` package to cut out the maximum temperature data to only the area for the Wisconsin cities.
 
@@ -182,7 +186,7 @@ ggplot() +
 ```
 
 
-# Summarize raster data by vector locations
+# 4) Summarize raster data by vector locations
 Now that we have our raster layer that contains the data we want to summarize, and the vector data that contains the locations indicating where we want to summarize the data, we can now put them together.
 
 If you are working with your own data, ask yourself:
