@@ -76,7 +76,7 @@ There are multiple ways to explore the attributes of a spatial data file. We hav
 
 For a visual method to explore attributes, you can try the `plot` function built into sf. This plots a small map for each of the attributes. For example 
 `plot(wi_precip)`
-Notice that this `plot` command displays attribute names but does not display data values.
+Notice that this `plot()` command displays attribute names but does not display data values.
 ```{r}
 plot(wi_precip)
 plot(wi_county)
