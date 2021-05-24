@@ -1,13 +1,15 @@
 ---
 title: "Day 5"
-teaching: 0
-exercises: 0
 questions:
-- "change"
+- "How can I summarize raster data based on vector locations"
 objectives:
-- "change"
+- "Import .csv files containing x,y coordinate locations and convert to a spatial object"
+- "Crop a raster to the extent of a vector layer"
+- "Extract values from a raster that correspond to a vector file overlay"
 keypoints:
-- "First key point. Brief Answer to questions. (FIXME)"
+- "Convert a data frame to an `sf` object using the `st_as_sf()` function."
+- "Use the `crop()` and `extract()` functions to get raster data of spatial subsets."
+- "Remember to check if your data align spatially by looking at the projection, extent, and units"
 ---
 
 ```{r setup, include=FALSE}
