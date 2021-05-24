@@ -118,7 +118,7 @@ Add the line `scale_fill_continuous(trans = 'reverse') +`
 {: .solution}
 
 ## 7) Plot multiple vector shapefiles
-You can use ggplot2 to plot mutiple vector shapefiles layered in a single plot. For example, adding a layer of the county outlines over the plot of precipitation with a second use of the `geom_sf` command. One design option to try is to make choices about the color and thickness of the county lines.
+You can use ggplot2 to plot mutiple vector shapefiles layered in a single plot. For example, adding a layer of the county outlines over the plot of precipitation with a second use of the `geom_sf()` command. One design option to try is to make choices about the color and thickness of the county lines.
 
 
 > ## Solution
