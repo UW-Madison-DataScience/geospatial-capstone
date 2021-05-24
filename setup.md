@@ -57,13 +57,15 @@ Advanced participants can replace some or all of the capstone data with their ow
 
 * All data should have the same or similar geographic extents. If you plan to use a mix capstone data with your data, your data should cover Wisconsin.
 
-* Data should be georeferenced and projected. GeoTIFF format is recommended.
+* Data should be georeferenced and projected.
 
 * At least two raster variables are needed for raster math exercises. 
 
 * Continuous or surface raster data work the best. Classified data such as land use or land cover data will make it difficult to follow along.
 
 * Vector data should include one point dataset and one polygon dataset.
+
+* Raster data should be in GeoTIFF format and vector data should be in Shapefile format.
 
 ### Places to find data?
 
