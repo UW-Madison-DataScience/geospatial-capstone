@@ -49,12 +49,12 @@ Examples of spatial questions are:
 
 In this capstone lesson we will use the following capstone data:
 
-+ World Climate raster of maximum temperature (GeoTIFF)
-+ Natural Earth populated places vector point data for cities in Wisconsin (csv)
++ World Climate raster of maximum temperature (will download)
++ Natural Earth populated places vector point data for cities in Wisconsin (provided `ne_10m_populated_places_Wisconsin.csv` file)
 
 We will use the vector data to crop the raster data to the extent of Wisconsin and summarize the raster data using the point locations of Madison and Milwaukee.
 
-*If you are using your own data*, please have raster and vector data that cover a similar geographic area. Since we are cropping the raster data by the vector data, it will work best if your vector data is of a smaller geographic area than the raster data.
+**If you are using your own data**, please have raster and vector data that cover a similar geographic area. Since we are cropping the raster data by the vector data, it will work best if your vector data is of a smaller geographic area than the raster data.
 
 # 2) Load libraries and import data
 For raster data, we use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will visualize our data, we will use the plotting package `ggplot2`.
@@ -69,32 +69,61 @@ library(ggplot2)
 
 
 ## Load raster data
-For this example, we will use the World Climate dataset. You can either download this dataset from the website. Or you can access the dataset using the R package.
+The capstone data includes the World Climate Data or "WorldClim". We will use your coding skills to access the worldclim dataset from the `raster` package, crop it to our extent of interest, and summarize the data. By the end of this section you should have your raster data as a 'Formal class RasterLayer' in your Global Environment
 
-If you need a refresher on how to do this, look at this website: https://www.gis-blog.com/r-raster-data-acquisition/ 
+> ## World Climate Data
+>
+> You can learn about and download the WorldClim from the website: https://www.worldclim.org/data/worldclim21.html 
+> For an example of how to use the `raster` package to access the WorldClim (raster) data and GADM (vector) data, visit this tutorial: https://www.gis-blog.com/r-raster-data-acquisition/ 
+> 
+>
+> {: .source}
+{: .callout}
 
-The goal of this section is to have your raster data as a 'Formal class RasterLayer' in your Global Environment
+For the WorldClim data, we need to specify the data variable and the spatial resolution. We will use the ["bio" variable] (https://www.worldclim.org/data/bioclim.html), which are 19 historial bioclimatic variables. The bio variables include things like:
 
-```{r load-raster-data}
++ annual mean temperature
++ max temperataure of the warmest month
++ annual precipitation
++ precipiation of wettest month
 
-# get worldclim data, variable "bio" with a 10 degree resolution
-# this line is downloading data
-# if you selected a resolution higher than 10 (with a res of 0.5,2.5, or 5) it may take a while to download
-worldClim_bio_global <- getData("worldclim", var="bio", res=10)
+The bio variables are available at spatial resolutions of 10 minutes, 5 minutes, 2.5 minutes, and 30 seconds.
 
-# use only the bio5 variable (BIO5 = Max Temperature of Warmest Month)
-plot(worldClim_bio_global$bio5)
+Wait, why is spatial resolution in units of time? 
+This is because the spatial coordinates on a sphere are often expressed as degrees-minutes-seconds. 10 minutes is the biggest and 30 seconds is the smallest. An online conversion tool is helpful to understand these unit conversions(https://www.opendem.info/arc2meters.html)
 
-maxTemp_global <- worldClim_bio_global$bio5
+For the capstone data, we want to use the largest spatial resolution of 10 minutes. This means each pixel represents about 13 km on the ground at the approximate latitude of Wisconsin. Within the "bio" variables, we will use the "bio5" variable that represents the maxiumum temperature of the warmest month.
 
 
-```
+
+> ## Solution
+> ```{r load-raster-data}
+> 
+> # get worldclim data, variable "bio" with a 10 minute resolution
+> # this line is downloading data
+> # if you selected a resolution higher than 10 (with a res of 0.5,2.5, or 5) it may take a while to download
+> worldClim_bio_global <- getData("worldclim", var="bio", res=10)
+> 
+> # use only the bio5 variable (BIO5 = Max Temperature of Warmest Month
+> maxTemp_global <- worldClim_bio_global$bio5
+> 
+> # plot data
+> plot(maxTemp_global)
+> ```
+{: .solution}
 
 
 ## Load vector data
-For this example, we will use the Natual Earth Populated Places dataset. You can access these data from the Natural Earth package, or download the data from the website.
+The capstone data includes the Natual Earth Populated Places dataset. We have provided the dataset for you as a ".csv" file in the Capstone data folder. By the end of this section you should have a simple feature ('sf') data frame type of object in your Global Environment.
 
-The goal of this section is to have a simple feature ('sf') data frame type of object in your Global Environment.
+> ## Natural Earth Data
+>
+> You can learn about and download the Natural Earth dataset from the website: https://www.naturalearthdata.com/
+> You can also download Natural Earth data directly into R using the [`rnaturalearth` package] (https://cran.r-project.org/web/packages/rnaturalearth/README.html)
+> 
+>
+> {: .source}
+{: .callout}
 
 
 ```{r load-city-point-data}
@@ -112,9 +141,6 @@ Recall from your lesson how to import point data and convert it to a spatial dat
 When looking at the column names we see that there is a lot of data! To convert to a spatial points data layer, we need to know information about the coordinate system and the coordinates for each point.
 
 The column names 'LATITUDE' and 'LONGITUDE' have what we need! 
-
-Explain how we know about the coordinate system because of these coordinates.
-Reference this website: https://spatialreference.org/ref/epsg/wgs-84/ 
 
 > ## Solution: Load .csv point data?
 >
@@ -138,6 +164,7 @@ class(WIcities_points)
 
 
 ```
+
 
 A critical part of working with raster and vector data together is that the datasets are in the same coordinate system. 
 
@@ -190,18 +217,41 @@ ggplot() +
 Now that we have our raster layer that contains the data we want to summarize, and the vector data that contains the locations indicating where we want to summarize the data, we can now put them together.
 
 If you are working with your own data, ask yourself:
+
 + How do I want to summarize the data? For example, do I want a single mean value? A maximum? A distribution of all values?
 + What is the area I want to summarize? If it's a point, do you want a certain distance around the point? Or, if it's an area, you will include all of the raster values within that area.
 
-One thing you'll need to consider is the converstion from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles. Here is an article: https://www.usgs.gov/faqs/how-much-distance-does-a-degree-minute-and-second-cover-your-maps?qt-news_science_products=0#qt-news_science_products 
+## Extract pixel values
+
+For the capstone data, we want to extract all the pixel values within a distance buffer of the two city points. Since our data is "unprojected" and therefor the units are in lat/long, the buffer distance will be in meters (hint: this information is in the Help file for the `extract` function!)
+
+> ## Geographic and projected unit reminder
+>
+> Remember, your raster is "unprojected" meaning that the pixels represent distances on a sphere of degrees, minutes, and seconds.
+> You'll need to consider is the converstion from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles.
+>
+>
+> {: .source}
+{: .callout}
 
 ```{r extract-raster-by-vector}
 
-# I'm exepcting a distibution but am getting a single value
-# does it have to do with the resolution and the buffer size?
-df_maxTemp_MM <- as.data.frame(extract(x=maxTemp_global,df=TRUE,
+# extract pixel values from the raster based on the Milwaukee and Madison points
+# using a buffer size of 50,000 (50 km around the each point) because the units are in meters
+maxTemp_MM <- extract(x=maxTemp_global,df=TRUE,
                            y=MM_points,
-                           buffer=50000))
+                           buffer=50000)
+
+```
+
+## Convert data and plot
+
+The last few steps will be small conversions of the datatypes to make it easy for summarizing and plotting.
+
+```{r data-frame-for-plotting}
+
+# convert to data frame for each calculations and plotting
+df_maxTemp_MM <- as.data.frame(maxTemp_MM)
 
 # clean up data frame because we want to give IDs names and convert the temperature data
 df_maxTemp_MM$ID <- as.factor(df_maxTemp_MM$ID)
@@ -218,6 +268,7 @@ ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) +
   ylab("Frequency of Pixels")
 
 ```
+
 
 The graph above shows us the distribution of maximum temperatures within 50 km of Madison and Milwaukee. We have a distribution of values because the extracted data represents each individual pixel within the 50 km buffer. This graph shows us that the maximum temperatures recorded in the Madison are tend to be higher than the maximum temperatures recorded in the Milwaukee region. Does this pattern make sense with your knowledge of the area and the data? Remember, visualizing the data can be important in understanding and explaining patterns.
 
