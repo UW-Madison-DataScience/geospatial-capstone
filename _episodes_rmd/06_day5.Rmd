@@ -59,13 +59,14 @@ We will use the vector data to crop the raster data to the extent of Wisconsin a
 # 2) Load libraries and import data
 For raster data, we use functions in the `raster` package. For vector data, you will use functions in the `sf` package. In addition, because we will visualize our data, we will use the plotting package `ggplot2`.
 
-```{r load package, message=FALSE}
-
-library(raster)
-library(sf)
-library(ggplot2)
-
-```
+> ## Solution
+> ```{r load package, message=FALSE}
+> 
+> library(raster)
+> library(sf)
+> library(ggplot2)
+> ```
+{: .solution}
 
 
 ## Load raster data
@@ -121,20 +122,19 @@ The capstone data includes the Natual Earth Populated Places dataset. We have pr
 > You can learn about and download the Natural Earth dataset from the website: https://www.naturalearthdata.com/
 > You can also download Natural Earth data directly into R using the [`rnaturalearth` package] (https://cran.r-project.org/web/packages/rnaturalearth/README.html)
 > 
->
 > {: .source}
 {: .callout}
 
-
-```{r load-city-point-data}
-
-# import point data from a csv file
-WIcities <- read.csv("../data/ne_10m_populated_places_Wisconsin.csv")
-
-# check out the data
-colnames(WIcities)
-
-```
+> ## Solution
+> ```{r load-city-point-data}
+> 
+> # import point data from a csv file
+> WIcities <- read.csv("../data/ne_10m_populated_places_Wisconsin.csv")
+> 
+> # check out the data
+> colnames(WIcities)
+>```
+{: .solution}
 
 Recall from your lesson how to import point data and convert it to a spatial data layer in R.
 
@@ -142,33 +142,20 @@ When looking at the column names we see that there is a lot of data! To convert 
 
 The column names 'LATITUDE' and 'LONGITUDE' have what we need! 
 
-> ## Solution: Load .csv point data?
->
-> Text here describing what's in this box
->
->
-> > ## Solution
-> >
-> > ```{r, echo=FALSE}
-> > paste("This", "new", "template", "looks", "good")
-> > ```
-> {: .solution}
-
-```{r convert-to-points}
-
-# convert data frame to sf type of object by specifying coordinates (as xy) and the projection as a crs
-WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=crs(maxTemp_global))
-
-# check class of object - should be "sf" data frame
-class(WIcities_points)
-
-
-```
-
+> ## Solution
+> ```{r convert-to-points}
+> 
+> # convert data frame to sf type of object by specifying coordinates (as xy) and the projection as a crs
+> WIcities_points <- st_as_sf(WIcities, coords=c('LONGITUDE','LATITUDE'), crs=crs(maxTemp_global))
+> 
+> # check class of object - should be "sf" data frame
+> class(WIcities_points)
+> ```
+{: .solution}
 
 A critical part of working with raster and vector data together is that the datasets are in the same coordinate system. 
 
-Does it make sense? Are they the same?
+Does it make sense? Are they the same? You can use the functions in the `raster` package to check out your data.
 
 ```{r check-coordinate-systems}
 
@@ -183,35 +170,35 @@ res(maxTemp_global)
 ```
 
 
-
 Finally, let's subset our spatial data to only include the city points we are interested in. For the sample dataset, we are going to subset the data to only include the cities of Madison and Milwaukee.
 
 If you are using your own data, you may or may not need to do this subset.
 
-```{r subset-vector-data}
-
-WIcities_points$NAME
-
-MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAME=='Milwaukee',]
-
-```
+> ## Solution
+> ```{r subset-vector-data}
+> 
+> WIcities_points$NAME
+> 
+> MM_points <- WIcities_points[WIcities_points$NAME=='Madison'|WIcities_points$NAME=='Milwaukee',]
+> ```
+{: .solution}
 
 # 3) Crop raster with vector 
 
 It may be useful to limit the raster data to only areas of interest. This is helpful when you load a larger raster file, such as data for the entire globe, but are only interested in a small part. For our capstone data, we loaded the global temperature data, but we are only interested in the data for Wisconsin, and specifically, the data for Milwaukee and Madison. Let's use the `crop()` function in the `raster` package to cut out the maximum temperature data to only the area for the Wisconsin cities.
 
-```{r crop-raster-by-vector}
-
-maxTemp_WI <- crop(x = maxTemp_global, y = extent(WIcities_points),snap="out")
-maxTemp_WI_df <- as.data.frame(maxTemp_WI, xy=T)
-
-ggplot() +
-  geom_raster(data = maxTemp_WI_df,aes(x = x, y = y, fill = bio5)) + 
-  geom_sf(data = MM_points,color="yellow",size=5) + 
-  coord_sf()
-
-```
-
+> ## Solution
+> ```{r crop-raster-by-vector}
+> 
+> maxTemp_WI <- crop(x = maxTemp_global, y = extent(WIcities_points),snap="out")
+> maxTemp_WI_df <- as.data.frame(maxTemp_WI, xy=T)
+> 
+> ggplot() +
+>   geom_raster(data = maxTemp_WI_df,aes(x = x, y = y, fill = bio5)) + 
+>   geom_sf(data = MM_points,color="yellow",size=5) + 
+>   coord_sf()
+> ```
+{: .solution}
 
 # 4) Summarize raster data by vector locations
 Now that we have our raster layer that contains the data we want to summarize, and the vector data that contains the locations indicating where we want to summarize the data, we can now put them together.
@@ -234,40 +221,43 @@ For the capstone data, we want to extract all the pixel values within a distance
 > {: .source}
 {: .callout}
 
-```{r extract-raster-by-vector}
-
-# extract pixel values from the raster based on the Milwaukee and Madison points
-# using a buffer size of 50,000 (50 km around the each point) because the units are in meters
-maxTemp_MM <- extract(x=maxTemp_global,df=TRUE,
-                           y=MM_points,
-                           buffer=50000)
-
-```
+> ## Solution
+> ```{r extract-raster-by-vector}
+> 
+> # extract pixel values from the raster based on the Milwaukee and Madison points
+> # using a buffer size of 50,000 (50 km around the each point) because the units are in meters
+> maxTemp_MM <- extract(x=maxTemp_global,df=TRUE,
+>                            y=MM_points,
+>                            buffer=50000)
+> 
+> ```
+{: .solution}
 
 ## Convert data and plot
 
 The last few steps will be small conversions of the datatypes to make it easy for summarizing and plotting.
 
-```{r data-frame-for-plotting}
-
-# convert to data frame for each calculations and plotting
-df_maxTemp_MM <- as.data.frame(maxTemp_MM)
-
-# clean up data frame because we want to give IDs names and convert the temperature data
-df_maxTemp_MM$ID <- as.factor(df_maxTemp_MM$ID)
-levels(df_maxTemp_MM$ID) = levels(as.factor(MM_points$NAME))
-
-df_maxTemp_MM$bio5 <- df_maxTemp_MM$bio5/10
-
-# plot data
-# can make it prettier 
-ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) + 
-  geom_histogram() +
-  ggtitle("Histogram of maximum temperatures within 50 km of the city") +
-  xlab("Maximum temperature (C)") + 
-  ylab("Frequency of Pixels")
-
-```
+> ## Solution
+> ```{r data-frame-for-plotting}
+> 
+> # convert to data frame for each calculations and plotting
+> df_maxTemp_MM <- as.data.frame(maxTemp_MM)
+> 
+> # clean up data frame because we want to give IDs names and convert the temperature data
+> df_maxTemp_MM$ID <- as.factor(df_maxTemp_MM$ID)
+> levels(df_maxTemp_MM$ID) = levels(as.factor(MM_points$NAME))
+> 
+> df_maxTemp_MM$bio5 <- df_maxTemp_MM$bio5/10
+> 
+> # plot data
+> ggplot(data = df_maxTemp_MM, aes(x = bio5,fill=ID)) + 
+>   geom_histogram() +
+>   ggtitle("Histogram of maximum temperatures within 50 km of the city") +
+>   xlab("Maximum temperature (C)") + 
+>   ylab("Frequency of Pixels")
+> 
+> ```
+{: .solution}
 
 
 The graph above shows us the distribution of maximum temperatures within 50 km of Madison and Milwaukee. We have a distribution of values because the extracted data represents each individual pixel within the 50 km buffer. This graph shows us that the maximum temperatures recorded in the Madison are tend to be higher than the maximum temperatures recorded in the Milwaukee region. Does this pattern make sense with your knowledge of the area and the data? Remember, visualizing the data can be important in understanding and explaining patterns.
