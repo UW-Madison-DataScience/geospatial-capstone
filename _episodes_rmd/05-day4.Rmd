@@ -24,7 +24,7 @@ knitr_fig_path("05-")
 In this capstone lesson, we will work with two Wisconsin vector data files: precipitation, and county boundaries. If you are using your own data, please identify 2 different vector files that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate an example workflow of loading, exploring, and plotting vectors. 
 
 ## 1) Load Libraries 
-Load these libraries if you don't already have them (dplyr, ggplot2, sf, rgdal)
+Load these libraries if you don't already have them (`dplyr`, `ggplot2`, `sf`, `rgdal`)
 
 
 > ## Solution
