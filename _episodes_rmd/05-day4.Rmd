@@ -7,7 +7,7 @@ questions:
 - "What are some plotting options to impact the way data are visualized?" 
 output: html_document
 objectives:
-- "Importing vector data; exploring vector data through attributes and by plotting"
+- "Importing vector data and visually explore the vector data through attributes and by visualization."
 keypoints: 
  - "exploring vector data attributes"
  - "consider design options for your vector data"
@@ -171,4 +171,3 @@ Commands to plot the map are similiar to previous examples, with the addition of
   ggtitle("Wisconsin Avg. Annual Precipitation 1981-2000") +
   coord_sf()
  ```
-
