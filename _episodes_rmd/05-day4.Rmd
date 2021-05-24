@@ -161,7 +161,7 @@ colors <- sequential_hcl(11, palette = "Purples 3")  #11 categories
 colors <- rev(colors)   #reverses order
 ```
 
-Commands to plot the map are similiar to previous examples, with the addition of the `cut_interval` function which creates groups with equal ranges of values.
+Commands to plot the map are similiar to previous examples, with the addition of the `cut_interval()` function which creates groups with equal ranges of values.
 
 
  ```{r, eval=TRUE}
