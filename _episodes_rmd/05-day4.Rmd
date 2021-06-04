@@ -84,7 +84,7 @@ plot(wi_county)
 {: .solution}
 
 ## 5) Using ggplot2 to plot data with selected attribute of interest
-If working with our capstone data,  plot the precipitation shapefile using the atribute you identified as the precipitation data to set the fill. One way to do this is to use a fill aesthetic mapped to the column name of the attribute you identified `aes(fill = )`  
+If working with the capstone data,  plot the precipitation shapefile using the attribute you identified as the precipitation data to set the fill. One way to do this is to use a fill aesthetic mapped to the column name of the attribute you identified `aes(fill = )`  
 
 
 
