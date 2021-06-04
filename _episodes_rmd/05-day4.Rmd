@@ -71,7 +71,7 @@ Explore the metadata of the shapefiles. We will work towards combining these fil
 {: .solution}
 
 ## 4) Explore attributes. Identify attribute(s) of interest
-If you are working with our capstone data, identify the attribute that appears to contain the precipitation data, and the attribute of county name. If you are working with your own data, choose an attribute of interest to work with for plotting.
+If you are working with the capstone data, identify the attribute that appears to contain the precipitation data, and the attribute of county name. If you are working with your data, choose an attribute of interest to work with for plotting.
 There are multiple ways to explore the attributes of a spatial data file. We have worked with the `names()` function and previewing the first 6 rows with the `head()` functions as well as viewing the file in RStudio's Environment tab, or printing the shapefile object to the screen.
 
 For a visual method to explore attributes, you can try the `plot()` function built into sf. This plots a small map for each of the attributes. For example 
