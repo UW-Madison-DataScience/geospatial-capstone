@@ -37,9 +37,9 @@ In this final day we will implement tools you learned for combining raster and v
 
 A spatial question may look like the following:
 
-+ where does something occur?
-+ how does something change across space or time?
-+ what are the differences between locations?
++ Where does something occur?
++ How does something change across space or time?
++ What are the differences between locations?
 
 Examples of spatial questions are:
 
@@ -263,4 +263,3 @@ The last few steps will be small conversions of the datatypes to make it easy fo
 
 
 The graph above shows us the distribution of maximum temperatures within 50 km of Madison and Milwaukee. We have a distribution of values because the extracted data represents each individual pixel within the 50 km buffer. This graph shows us that the maximum temperatures recorded in the Madison are tend to be higher than the maximum temperatures recorded in the Milwaukee region. Does this pattern make sense with your knowledge of the area and the data? Remember, visualizing the data can be important in understanding and explaining patterns.
-
