@@ -2,9 +2,9 @@
 title: "Day 2: Introduction to Raster Data"
 exercises: 5
 questions:
-- "What is the coordinate reference system for the maximum temperature raster? Is it the same as the coordinate reference system for the minimum temperature raster? "
+- "What are the coordinate reference systems for your rasters and are they the same? "
 objectives:
-- "Visually explore the patterns in minimum and maximum monthly temperature differs across Wisconsin.  Reproject the maxtemp raster into UTM coordinates."
+- "Visually explore the patterns in your rasters.  Reproject the your raster into UTM coordinates."
 keypoints:
 - "Always explore your raster first using the summary() and crs() functions."
 - "To plot your raster with ggplot(), first convert your raster to a data frame using the as.data.frame() function and specify the argument xy=TRUE."
@@ -12,13 +12,33 @@ keypoints:
 - "There are many plotting and aesthetics options in the ggplot2 package for you to explore."
 ---
 
+# Outline
+
+- Intro + Minute questions (10-15 min.)
+- Raster Capstone (30-40 min.):
+  - Load and summarize the raster data
+  - Visualize the raster data
+  - Develop insights
+  - Reproject your raster
+- Outro + Final Questions (10-15 min.)
+
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 source("../bin/chunk-options.R")
 knitr_fig_path("03-")
 ```
 
-In this capstone lesson, we will be 2 Wisconsin rasters of 1) maximum temperature and 2) minimum temperature. If you are using your own data, please identify 2 different rasters that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate a geospatial workflow of loading, summarizing, and plotting rasters as well as checking the CRS and projecting.
+
+In this capstone lesson, we use the following capstone data:
+
+  - A raster of maximum temperature in Wisconsin
+  - A raster of minimum temperature in Wisconsin
+  
+If you are using your own data, please identify two (2) rasters with continuous values and that are unprojected.
+
+<!-- In this capstone lesson, we will be providing you with capstone data that include two Wisconsin rasters of 1) maximum temperature and 2) minimum temperature. If you are using your own data, please identify 2 different rasters that you can use to summarize and visualize in this lesson. The learning objectives of this capstone are to demonstrate a geospatial workflow of loading, summarizing, and plotting rasters as well as checking the CRS and projecting. -->
 
 
 
@@ -138,7 +158,7 @@ Describe what patterns you observe across the state for coldest and warmest mont
 
 ## 5) Reproject
 
-Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `
+Reproject the maxtemp raster into UTM coordinates using the following crs string: ` +proj=utm +zone=15 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0 `.  This string was obtained from [Spatial Reference Orig](https://spatialreference.org/) under [PROJ4](https://spatialreference.org/ref/epsg/wgs-84-utm-zone-15n/proj4/).
 
 
 > ## Solution
