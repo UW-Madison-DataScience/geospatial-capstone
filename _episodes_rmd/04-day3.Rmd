@@ -2,15 +2,26 @@
 title: "Day 3: Introduction to Raster Data"
 exercises: 3
 questions:
-- "What is the average of the minimum and maximum temperatures in Wisconsin and what patterns do you observe?"
+- "What is the average of the minimum and maximum values of your raster and what patterns do you observe?"
 objectives:
 - "Import and explore multiple rasters and develop initial geospatial insights.  Use raster math to to calculate different summary statistics."
-- "Load in the precipitation raster and explore the raster, describe the patterns you observe. Load in the maximum and minimum temperature rasters and perform raster math."
+- "Load in and explore the rasters, describe the patterns you observe. Perform raster math."
 keypoints:
 - "Always explore your data and note initial geospatial insights."
 - "The overlay() function can be used to calculate different summary statistics for your raster."
 - "With the overlay() function, you can begin to develop your skills in writing functions."
 ---
+
+
+# Outline
+
+- Intro + Minute questions (10-15 min.)
+- Raster Capstone (30-40 min.):
+  - Load, summarize, and visualize your raster
+  - Use the `overlay()` function to perform raster math
+- Outro + Final Questions (10-15 min.)
+
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -18,8 +29,16 @@ source("../bin/chunk-options.R")
 knitr_fig_path("04-")
 ```
 
+In this capstone lesson, we use the following capstone data:
 
-In this capstone lesson, we will be 3 Wisconsin rasters of 1) precipitation, 2) maximum temperature, 3) minimum temperature. We will be using the precipitation raster to review plotting rasters using `ggplot()` and maximum and minimum temperature rasters to perform raster math on. If you are using your own data, please identify at least 2 different rasters that you can use to perform raster math on - you can use the same raster to perform the raster plotting in part (1). The learning objectives of this capstone are to review importing plotting rasters with the ggplot2 package and developing initial geospatial insights, to use the `overlay()` function to calculate summary statistics of your two rasters, and to reinforce writing functions in the `overlay()` function.
+  - A raster of precipitation in Wisconsin
+  - A raster of maximum temperature in Wisconsin
+  - A raster of minimum temperature in Wisconsin
+  
+If you are using your own data, please identify two (3) rasters with continuous values that are unprojected. You may use the same 2 rasters from the previous section.
+
+
+<!-- In this capstone lesson, we will be 3 Wisconsin rasters of 1) precipitation, 2) maximum temperature, 3) minimum temperature. We will be using the precipitation raster to review plotting rasters using `ggplot()` and maximum and minimum temperature rasters to perform raster math on. If you are using your own data, please identify at least 2 different rasters that you can use to perform raster math on - you can use the same raster to perform the raster plotting in part (1). The learning objectives of this capstone are to review importing plotting rasters with the ggplot2 package and developing initial geospatial insights, to use the `overlay()` function to calculate summary statistics of your two rasters, and to reinforce writing functions in the `overlay()` function. -->
 
 
 
