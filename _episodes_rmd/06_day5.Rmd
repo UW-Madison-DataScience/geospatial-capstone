@@ -21,7 +21,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Outline
 
 - Addressing Minute questions (10-15 minutes)
-- Capstone lesson
+- Capstone lesson (30-40 minutes)
     1. Revisit your spatial question
     2. Load libraries and import data
     3. Crop raster with a vector
@@ -142,7 +142,7 @@ Recall from your lesson how to import point data and convert it to a spatial dat
 
 When looking at the column names we see that there is a lot of data! To convert to a spatial points data layer, we need to know information about the coordinate system and the coordinates for each point.
 
-The column names 'LATITUDE' and 'LONGITUDE' have what we need! 
+The column names `LATITUDE` and `LONGITUDE` have what we need! 
 
 > ## Solution
 > ```{r convert-to-points}
@@ -174,7 +174,7 @@ res(maxTemp_global)
 
 Finally, let's subset our spatial data to only include the city points we are interested in. For the sample dataset, we are going to subset the data to only include the cities of Madison and Milwaukee.
 
-If you are using your own data, you may or may not need to do this subset.
+If you are using your own data, you may or may not need to do this subset or you might want to choose different locations.
 
 > ## Solution
 > ```{r subset-vector-data}
@@ -212,7 +212,7 @@ If you are working with your own data, ask yourself:
 
 ## Extract pixel values
 
-For the capstone data, we want to extract all the pixel values within a distance buffer of the two city points. Since our data is "unprojected" and therefor the units are in lat/long, the buffer distance will be in meters (hint: this information is in the Help file for the `extract` function!)
+For the capstone data, we want to extract all the pixel values within a distance buffer of the two city points. Since our data is "unprojected" and therefore the units are in latitude and longitude, the buffer distance will be in meters (hint: this information is in the Help file for the `extract` function!)
 
 > ## Geographic and projected unit reminder
 >
