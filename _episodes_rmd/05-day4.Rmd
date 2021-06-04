@@ -53,7 +53,7 @@ Filenames: precip1981_2010_a_wi.shp  and  WI_Counties2010.shp
 ## 3) Explore metadata
 We have worked with commands to explore the geometry type, and projection of vector data files. Examples include:`st_geometry_type()`, `st_crs()`,  `st_bbox()`, as well as reviewing the output produced in R when you imported the shapefiles. 
 
-Explore the metadata of the shapefiles. We will work towards comnining these files in the same plot. Are these files suited to being plotted together - for example, are they in the same CRS and cover the same area? 
+Explore the metadata of the shapefiles. We will work towards combining these files in the same plot. Are these files suited to being plotted together - for example, are they in the same CRS and cover the same area? 
 
 > ## Solution
 > ```{r, eval=TRUE}
