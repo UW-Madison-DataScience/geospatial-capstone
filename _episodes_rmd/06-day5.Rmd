@@ -1,5 +1,5 @@
 ---
-title: "Day 5"
+title: "Day 5: Manipulating Raster Data"
 questions:
 - "How can I summarize raster data based on vector locations"
 objectives:
