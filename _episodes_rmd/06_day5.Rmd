@@ -79,8 +79,6 @@ The capstone data includes the World Climate Data or "WorldClim". We will use yo
 > You can learn about and download the WorldClim from the website: https://www.worldclim.org/data/worldclim21.html 
 > For an example of how to use the `raster` package to access the WorldClim (raster) data and GADM (vector) data, visit this tutorial: https://www.gis-blog.com/r-raster-data-acquisition/ 
 > 
->
-> {: .source}
 {: .callout}
 
 For the WorldClim data, we need to specify the data variable and the spatial resolution. We will use the ["bio" variable] (https://www.worldclim.org/data/bioclim.html), which are 19 historial bioclimatic variables. The bio variables include things like:
@@ -124,7 +122,6 @@ The capstone data includes the Natual Earth Populated Places dataset. We have pr
 > You can learn about and download the Natural Earth dataset from the website: https://www.naturalearthdata.com/
 > You can also download Natural Earth data directly into R using the [`rnaturalearth` package] (https://cran.r-project.org/web/packages/rnaturalearth/README.html)
 > 
-> {: .source}
 {: .callout}
 
 > ## Solution
@@ -219,8 +216,6 @@ For the capstone data, we want to extract all the pixel values within a distance
 > Remember, your raster is "unprojected" meaning that the pixels represent distances on a sphere of degrees, minutes, and seconds.
 > You'll need to consider is the converstion from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles.
 >
->
-> {: .source}
 {: .callout}
 
 > ## Solution
