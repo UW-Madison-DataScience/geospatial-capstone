@@ -14,8 +14,8 @@ keypoints:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-#source("../bin/chunk-options.R")
-#knitr_fig_path("03-")
+source("../bin/chunk-options.R")
+knitr_fig_path("06-")
 ```
 
 # Outline
