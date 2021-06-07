@@ -1,6 +1,18 @@
 ## Current
 
+## Release v1.1.9 (5 Jun 2021)
+
+concurrent-ruby:
+
+* (#866) Child promise state not set to :pending immediately after #execute when parent has completed 
+* (#905, #872) Fix RubyNonConcurrentPriorityQueue#delete method
+* (2df0337d) Make sure locks are not shared on shared when objects are dup/cloned
+* (#900, #906, #796, #847, #911) Fix Concurrent::Set tread-safety issues on CRuby
+* (#907) Add new ConcurrentMap backend for TruffleRuby
+
 ## Release v1.1.8 (20 January 2021)
+
+concurrent-ruby:
 
 * (#885) Fix race condition in TVar for stale reads 
 * (#884) RubyThreadLocalVar: Do not iterate over hash which might conflict with new pair addition
