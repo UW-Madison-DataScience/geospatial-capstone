@@ -9,9 +9,9 @@ output: html_document
 objectives:
 - "Importing vector data and visually explore the vector data through attributes and by visualization."
 keypoints: 
- - "exploring vector data attributes"
- - "consider design options for your vector data"
- - "visual analysis of plotted data"
+ - "-	Options for exploring vector files include displaying metadata, and visually examining plots"
+ - "-	R offers design options for the visual display of vector data, including choosing a color palette, and reversing the order of colors assigned to categories"
+
 ---
 
 ```{r setup, include=FALSE}
@@ -40,6 +40,12 @@ Load these libraries if you don't already have them (`dplyr`, `ggplot2`, `sf`, `
 In this exercise, we have provided two capstone vector data files: Wisconsin Annual Precipitation Average 1981-2010, and county outlines. You can work with these, or with your own vector datasets.
 
 Filenames: precip1981_2010_a_wi.shp  and  WI_Counties2010.shp
+
+## Note about the Shapefile format
+>
+> Although we will be importing Shapefiles using the name of a single file with the extension ".shp" be aware that a Shapefile actually consists of a folder of multiple files, each having the same name but with different extensions. The multiple files in the folder each contain information about different aspects of the geospatial data.
+> For more information see "What is a Shapefile?" https://www.gislounge.com/what-is-a-shapefile/
+{: .callout}
 
 > ## Solution
 > ```{r, eval=TRUE}
@@ -161,7 +167,7 @@ colors <- sequential_hcl(11, palette = "Purples 3")  #11 categories
 colors <- rev(colors)   #reverses order
 ```
 
-Commands to plot the map are similiar to previous examples, with the addition of the `cut_interval()` function which creates groups with equal ranges of values.
+The `cut_interval()` function can be used to assign the range of data values into a given number of groups. In this example we are using `cut_interval()` as an aspect of assigning a plot color to a group of data values within the “Inches” attribute . In this case, using 11 groups for `cut_interval()`  assigns a color to each unique data value. 
 
 
  ```{r, eval=TRUE}
@@ -171,3 +177,28 @@ Commands to plot the map are similiar to previous examples, with the addition of
   ggtitle("Wisconsin Avg. Annual Precipitation 1981-2000") +
   coord_sf()
  ```
+ 
+ Changing the value in the `cut_interval()` function to a number that is less than the number of unique values will combine multiple data values into a range plotted as the same color. This can be helpful to simplify the appearance of a plot with several unique data values.
+
+This example assigns the values of the “Inches” attribute to five categories.
+
+```{r, eval=TRUE}
+ggplot() +
+  geom_sf(data = wi_precip, aes(fill = cut_interval(Inches, (5)))) +
+  scale_fill_manual(values = colors) +
+  ggtitle("Wisconsin Avg. Annual Precipitation 1981-2000") +
+  coord_sf()
+ ```
+
+Notice that the polygons plot with outlines of each unique data value category, even though multiple data value categories are plotted with the same color. This can be a confusing appearance since the outlines don’t align with the color fills. This can be helped by setting the fill lineweight `lwd` to 0, suppressing the outlines. 
+
+```{r, eval=TRUE} 
+ggplot() +
+  geom_sf(data = wi_precip, aes(fill = cut_interval(Inches, (5))), lwd = 0) +
+  scale_fill_manual(values = colors) +
+  ggtitle("Wisconsin Avg. Annual Precipitation 1981-2000") +
+  coord_sf()
+ ```
+ 
+ 
+ 
