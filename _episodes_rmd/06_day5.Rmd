@@ -115,7 +115,7 @@ For the capstone data, we want to use the largest spatial resolution of 10 minut
 
 
 ## Load vector data
-The capstone data includes the Natual Earth Populated Places dataset. We have provided the dataset for you as a ".csv" file in the Capstone data folder. By the end of this section you should have a simple feature ('sf') data frame type of object in your Global Environment.
+The capstone data includes the Natural Earth Populated Places dataset. We have provided the dataset for you as a ".csv" file in the Capstone data folder. By the end of this section you should have a simple feature ('sf') data frame type of object in your Global Environment.
 
 > ## Natural Earth Data
 >
@@ -209,12 +209,12 @@ If you are working with your own data, ask yourself:
 
 ## Extract pixel values
 
-For the capstone data, we want to extract all the pixel values within a distance buffer of the two city points. Since our data is "unprojected" and therefore the units are in latitude and longitude, the buffer distance will be in meters (hint: this information is in the Help file for the `extract` function!)
+For the capstone data, we want to extract all the pixel values within a distance buffer of the two city points. Since our data is "unprojected" and therefore the units are in latitude and longitude, the buffer distance will be in meters (hint: this information is in the Help file for the `extract()` function!)
 
 > ## Geographic and projected unit reminder
 >
 > Remember, your raster is "unprojected" meaning that the pixels represent distances on a sphere of degrees, minutes, and seconds.
-> You'll need to consider is the converstion from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles.
+> You'll need to consider is the conversation from degrees to meters. The conversions depends on where you are on the globe. For example, at the equator, 1 degree is 111 km. This distance decreases as you move closer to the poles. Try setting the buffer to 50 km or 50,000 meters. This is something you can play around with as you explore the data.
 >
 {: .callout}
 
