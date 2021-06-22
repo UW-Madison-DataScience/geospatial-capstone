@@ -35,7 +35,7 @@ This is where you will store rmd files.
 
 Capstone data includes climate data to complement the environmental data used in the main workshop. If you would prefer to use your own data for the capstone, see the next section.
 
-You can download the capstone data by clicking [this download link](FIXME).
+You can download the capstone data by clicking [this download link](https://github.com/UW-Madison-DataScience/geospatial-capstone/blob/main/data/capstone-data.zip).
 The file approximately 2MB.
 
 The data will download as a single compressed `.zip` file.
